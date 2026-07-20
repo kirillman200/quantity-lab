@@ -1,0 +1,20 @@
+---
+interface Props { type: string }
+const { type } = Astro.props;
+---
+
+{type === 'paint' && (
+  <svg viewBox="0 0 120 120" aria-hidden="true"><path d="M22 22h56v45H22z" fill="none" stroke="currentColor" stroke-width="5"/><path d="M78 32h10a10 10 0 0 1 10 10v22a10 10 0 0 1-10 10H60v14" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M52 88h16v22H52z" fill="currentColor"/><path d="M30 56c12-10 23 8 39-5v16H30z" fill="currentColor" opacity=".25"/></svg>
+)}
+{type === 'tile' && (
+  <svg viewBox="0 0 120 120" aria-hidden="true"><path d="M17 17h86v86H17zM17 60h86M60 17v86" fill="none" stroke="currentColor" stroke-width="5"/><path d="m60 17 43 43m-86 0 43 43" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="6 5"/></svg>
+)}
+{type === 'landscape' && (
+  <svg viewBox="0 0 120 120" aria-hidden="true"><path d="M18 78c18-18 29 15 47-4 18-20 26 10 39-4v29H18z" fill="currentColor" opacity=".28"/><path d="M18 78c18-18 29 15 47-4 18-20 26 10 39-4M38 68V39m0 0c-14-2-17-14-17-14 12-2 20 3 17 14Zm0 0c14-2 17-14 17-14-12-2-20 3-17 14Zm44 24V42m0 0c-13-2-16-13-16-13 11-2 19 3 16 13Zm0 0c13-2 16-13 16-13-11-2-19 3-16 13Z" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+)}
+{type === 'concrete' && (
+  <svg viewBox="0 0 120 120" aria-hidden="true"><path d="m18 44 44-21 40 21-44 22z" fill="currentColor" opacity=".2"/><path d="m18 44 40 22 44-22v37L58 101 18 80zM58 66v35" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/><path d="m43 35 39 21" stroke="currentColor" stroke-width="3" stroke-dasharray="5 5"/></svg>
+)}
+{type === 'fence' && (
+  <svg viewBox="0 0 120 120" aria-hidden="true"><path d="M15 45h90M15 78h90" stroke="currentColor" stroke-width="5"/><path d="M22 104V27l10-12 10 12v77M50 104V27l10-12 10 12v77M78 104V27l10-12 10 12v77" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/></svg>
+)}

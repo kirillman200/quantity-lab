@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CalculatorCard from '../../components/CalculatorCard.astro';
+import { calculators, absolute } from '../../data/site';
+const jsonLd = { '@type': 'CollectionPage', name: 'Home Project Calculators', url: absolute('/calculators/'), hasPart: calculators.map((c) => ({ '@type': 'WebApplication', name: c.name, url: absolute(`/calculators/${c.slug}/`) })) };
+---
+<BaseLayout title="Home Project Calculators" description="Choose a substantial, product-neutral material planner for paint, floors, landscaping, concrete, or fencing." path="/calculators/" jsonLd={jsonLd}>
+  <header class="page-hero"><div class="shell"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>Calculators</span></nav><p class="eyebrow">Project planners</p><h1>What are you building next?</h1><p class="lead">Choose a calculator, add every project area, set the package coverage and local price, then save, share, or print the result.</p></div></header>
+  <section class="section"><div class="shell calculator-grid">{calculators.map((calculator, index) => <CalculatorCard calculator={calculator} index={index} />)}</div></section>
+  <div class="shell"><div class="ad-slot print-hidden" aria-label="Reserved ad space"><span>Reserved ad space</span></div></div>
+  <section class="section section-dark"><div class="shell"><div class="section-head"><div><p class="eyebrow">A safer estimate</p><h2>Know what the total assumes.</h2></div><p>Results use the dimensions and product data you provide. They remain planning estimates—not structural design, code approval, or a substitute for manufacturer instructions.</p></div></div></section>
+</BaseLayout>

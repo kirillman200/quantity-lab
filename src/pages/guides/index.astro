@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { guides, calculators, absolute } from '../../data/site';
+const jsonLd = { '@type': 'CollectionPage', name: 'Home Project Measurement Guides', url: absolute('/guides/'), hasPart: guides.map((g) => ({ '@type': 'TechArticle', headline: g.title, url: absolute(`/guides/${g.slug}/`) })) };
+---
+<BaseLayout title="Home Project Measurement Guides" description="Practical guides for measuring, selecting waste, comparing packages, and checking project assumptions." path="/guides/" jsonLd={jsonLd}>
+  <header class="page-hero"><div class="shell"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>Guides</span></nav><p class="eyebrow">Measure before you buy</p><h1>Clear guidance behind every calculation.</h1><p class="lead">Short, practical explanations of measurements, package coverage, waste, and the assumptions that change a project plan.</p></div></header>
+  <section class="section"><div class="shell">
+    {calculators.map((calculator) => {
+      const categoryGuides = guides.filter((guide) => guide.category === calculator.slug);
+      return <section style="margin-bottom:4rem"><div class="section-head"><div><p class="eyebrow">{calculator.eyebrow}</p><h2>{calculator.shortName}</h2></div><a href={`/calculators/${calculator.slug}/`}>Open calculator →</a></div><div class="guide-grid">{categoryGuides.map((guide) => <a class="guide-card" href={`/guides/${guide.slug}/`}><span class="meta"><span>Guide</span><span>{guide.readingTime}</span></span><h3>{guide.title}</h3><p>{guide.description}</p></a>)}</div></section>;
+    })}
+    <div class="ad-slot print-hidden" aria-label="Reserved ad space"><span>Reserved ad space</span></div>
+  </div></section>
+</BaseLayout>

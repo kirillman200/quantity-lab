@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f7f2e8"/>
+  <g fill="#725f44" opacity=".11"><circle cx="30" cy="30" r="2"/><circle cx="66" cy="30" r="2"/><circle cx="102" cy="30" r="2"/><circle cx="138" cy="30" r="2"/><circle cx="174" cy="30" r="2"/></g>
+  <circle cx="1015" cy="315" r="250" fill="none" stroke="#174e3b" stroke-opacity=".16" stroke-width="3" stroke-dasharray="10 12"/>
+  <circle cx="1015" cy="315" r="180" fill="none" stroke="#174e3b" stroke-opacity=".16" stroke-width="3"/>
+  <g transform="translate(84 72)">
+    <rect width="54" height="54" rx="13" fill="#174e3b"/>
+    <path d="M11 14h32v29H11z" fill="none" stroke="#fffdf8" stroke-width="3"/>
+    <path d="m17 36 8-16 7 11 6-14" fill="none" stroke="#b9d56a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="11" cy="14" r="4" fill="#f06d3a"/>
+    <text x="70" y="25" fill="#17231f" font-family="Arial, sans-serif" font-size="25" font-weight="700">PROJECT QUANTITY</text>
+    <text x="70" y="49" fill="#174e3b" font-family="Arial, sans-serif" font-size="16" font-weight="800" letter-spacing="6">LAB</text>
+  </g>
+  <text x="84" y="260" fill="#17231f" font-family="Arial, sans-serif" font-size="76" font-weight="800" letter-spacing="-3">Measure it.</text>
+  <text x="84" y="340" fill="#17231f" font-family="Arial, sans-serif" font-size="76" font-weight="800" letter-spacing="-3">Price it.</text>
+  <text x="84" y="420" fill="#f06d3a" font-family="Arial, sans-serif" font-size="76" font-weight="800" font-style="italic" letter-spacing="-3">Build it.</text>
+  <text x="88" y="500" fill="#5d675f" font-family="Arial, sans-serif" font-size="25">Materials, costs &amp; printable shopping lists.</text>
+  <g transform="translate(852 184) rotate(3)">
+    <rect x="0" y="0" width="300" height="330" rx="8" fill="#fffdf8" stroke="#d5ccbc" stroke-width="3"/>
+    <path d="M35 62h230M35 110h230M35 158h230M35 206h230" stroke="#d5ccbc" stroke-width="3"/>
+    <path d="M45 92h125V190H45z" fill="none" stroke="#174e3b" stroke-width="6"/>
+    <path d="m48 255 35 35 70-78" fill="none" stroke="#b9d56a" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="175" y="273" fill="#17231f" font-family="Arial, sans-serif" font-size="22" font-weight="800">SHOPPING</text>
+    <text x="175" y="301" fill="#17231f" font-family="Arial, sans-serif" font-size="22" font-weight="800">READY</text>
+  </g>
+</svg>

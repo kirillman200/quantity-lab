@@ -1,0 +1,144 @@
+---
+import '../styles/global.css';
+import { SITE, absolute, calculators } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  imageAlt?: string;
+  jsonLd?: Record<string, unknown> | Array<Record<string, unknown>>;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  path,
+  imageAlt = 'Project Quantity Lab calculators for home project materials and costs',
+  jsonLd,
+  type = 'website',
+  noindex = false,
+} = Astro.props;
+const pageTitle = title.includes(SITE.name) ? title : `${title} | ${SITE.name}`;
+const canonical = absolute(path);
+const socialImage = absolute('/images/share-card.png');
+const navPath = Astro.url.pathname;
+const organization = {
+  '@type': 'Organization',
+  '@id': `${SITE.origin}/#organization`,
+  name: SITE.name,
+  url: SITE.origin,
+  logo: absolute('/favicon.svg'),
+};
+const graph = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'} />
+    <meta name="theme-color" content="#f7f2e8" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="AI-readable site map" />
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <title>{pageTitle}</title>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@graph': [organization, ...graph] })} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header print-hidden">
+      <div class="shell header-inner">
+        <a class="brand" href="/" aria-label="Project Quantity Lab home">
+          <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true">
+            <path d="M8 12h32v26H8z" fill="none" stroke="currentColor" stroke-width="3" />
+            <path d="M14 31 22 18l6 9 6-11" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+            <circle cx="14" cy="12" r="4" fill="currentColor" />
+          </svg>
+          <span><strong>Project Quantity</strong><small>LAB</small></span>
+        </a>
+        <nav class="desktop-nav" aria-label="Primary navigation">
+          <a class:list={[{ active: navPath.startsWith('/calculators') }]} href="/calculators/">Calculators</a>
+          <a class:list={[{ active: navPath.startsWith('/guides') }]} href="/guides/">Guides</a>
+          <a class:list={[{ active: navPath === '/about/' }]} href="/about/">About</a>
+        </nav>
+        <a class="header-cta" href="/calculators/paint/">Start a project <span aria-hidden="true">→</span></a>
+        <details class="mobile-nav">
+          <summary aria-label="Open navigation"><span></span><span></span><span></span></summary>
+          <nav aria-label="Mobile navigation">
+            <a href="/calculators/">All calculators</a>
+            {calculators.map((calculator) => <a href={`/calculators/${calculator.slug}/`}>{calculator.shortName}</a>)}
+            <a href="/guides/">Guides</a>
+            <a href="/about/">About</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+    <main id="main-content">
+      <slot />
+    </main>
+    <footer class="site-footer print-hidden">
+      <div class="shell footer-grid">
+        <div>
+          <a class="brand footer-brand" href="/">
+            <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 12h32v26H8z" fill="none" stroke="currentColor" stroke-width="3"/><path d="M14 31 22 18l6 9 6-11" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="14" cy="12" r="4" fill="currentColor"/></svg>
+            <span><strong>Project Quantity</strong><small>LAB</small></span>
+          </a>
+          <p>Product-neutral material estimates, cost comparisons, and shopping lists—without an account.</p>
+        </div>
+        <div>
+          <h2>Plan</h2>
+          {calculators.map((calculator) => <a href={`/calculators/${calculator.slug}/`}>{calculator.shortName}</a>)}
+        </div>
+        <div>
+          <h2>Learn</h2>
+          <a href="/guides/">Project guides</a>
+          <a href="/about/">About</a>
+          <a href="/contact/">Contact</a>
+          <a href="/access/">Access</a>
+        </div>
+        <div>
+          <h2>Trust</h2>
+          <a href="/privacy/">Privacy</a>
+          <a href="/terms/">Terms</a>
+          <a href="/security/">Security</a>
+          <button class="link-button" type="button" data-clear-projects>Clear saved projects</button>
+        </div>
+      </div>
+      <div class="shell footer-bottom">
+        <p>© {new Date().getFullYear()} {SITE.name}</p>
+        <p>Planning estimates only—confirm package coverage and local requirements.</p>
+      </div>
+    </footer>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => undefined));
+      }
+      document.querySelector('[data-clear-projects]')?.addEventListener('click', () => {
+        for (const key of Object.keys(localStorage)) if (key.startsWith('pql:')) localStorage.removeItem(key);
+        window.dispatchEvent(new CustomEvent('pql:cleared'));
+      });
+    </script>
+  </body>
+</html>

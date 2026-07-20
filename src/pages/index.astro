@@ -1,0 +1,95 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CalculatorCard from '../components/CalculatorCard.astro';
+import { SITE, calculators, guides } from '../data/site';
+
+const webApp = {
+  '@type': 'WebApplication',
+  '@id': `${SITE.origin}/#app`,
+  name: SITE.name,
+  url: SITE.origin,
+  applicationCategory: 'UtilitiesApplication',
+  operatingSystem: 'Any modern web browser',
+  description: SITE.description,
+  browserRequirements: 'Requires JavaScript for calculators; guide content works without it.',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  featureList: ['Five project calculators', 'Metric and imperial units', 'Local project saves', 'Shareable URL state', 'Printable shopping lists'],
+};
+---
+
+<BaseLayout title="Home Project Material Calculators" description={SITE.description} path="/" jsonLd={webApp}>
+  <section class="hero">
+    <div class="shell hero-grid">
+      <div>
+        <p class="eyebrow">Plan once. Buy with confidence.</p>
+        <h1>Measure it.<br />Price it.<br /><em>Build it.</em></h1>
+        <p class="lead">Turn room dimensions and outdoor measurements into material quantities, estimated costs, and a printable shopping list—without an account or a sales pitch.</p>
+        <div class="hero-actions">
+          <a class="button" href="/calculators/">Choose a calculator <span aria-hidden="true">→</span></a>
+          <a class="button secondary" href="/guides/">Read measurement guides</a>
+        </div>
+        <div class="trust-row" aria-label="Product benefits">
+          <span>Free to use</span><span>Saved on your device</span><span>Metric + imperial</span><span>Print to PDF</span>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="Illustration of a project measurement plan">
+        <div class="shape-orbit orbit-one"></div><div class="shape-orbit orbit-two"></div>
+        <div class="plan-sheet">
+          <div class="sheet-head"><strong>Kitchen repaint</strong><span>PROJECT 01</span></div>
+          <div class="measurement-sketch"><span class="sketch-door"></span></div>
+          <div class="sheet-total"><span>Shopping quantity<br />2 finish coats</span><strong>2 gal</strong></div>
+        </div>
+        <div class="tape" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="calculators">
+    <div class="shell">
+      <div class="section-head">
+        <div><p class="eyebrow">Five focused planners</p><h2>From first measurement<br />to the checkout list.</h2></div>
+        <p>Each calculator handles multiple areas, transparent formulas, product package sizes, waste, and optional local prices.</p>
+      </div>
+      <div class="calculator-grid">
+        {calculators.map((calculator, index) => <CalculatorCard calculator={calculator} index={index} />)}
+      </div>
+    </div>
+  </section>
+
+  <div class="shell"><div class="ad-slot print-hidden" aria-label="Reserved ad space"><span>Reserved ad space</span></div></div>
+
+  <section class="section section-dark">
+    <div class="shell">
+      <div class="section-head"><div><p class="eyebrow">Independent by design</p><h2>A planner—not a product funnel.</h2></div><p>Use the package coverage and prices available where you live. The result explains its assumptions, so you can check every number.</p></div>
+      <div class="feature-list">
+        <div class="feature-item"><span>01 / MULTI-AREA</span><h3>Plan the whole project</h3><p>Add rooms, beds, pours, or fence runs instead of repeating a one-field calculator.</p></div>
+        <div class="feature-item"><span>02 / COMPARE</span><h3>Price real packages</h3><p>Compare bag or box counts and keep the exact quantity visible beside the rounded purchase.</p></div>
+        <div class="feature-item"><span>03 / EXPLAIN</span><h3>See the formula</h3><p>Every result includes assumptions, conservative allowances, and a worked example.</p></div>
+        <div class="feature-item"><span>04 / KEEP LOCAL</span><h3>Save without signing up</h3><p>Your project can stay in localStorage, travel in a share link, or print to a PDF on your device.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="shell"><div class="ad-slot compact print-hidden" aria-label="Reserved ad space"><span>Reserved ad space</span></div></div>
+
+  <section class="section">
+    <div class="shell">
+      <div class="section-head"><div><p class="eyebrow">Measure with context</p><h2>Guides that make the<br />numbers more useful.</h2></div><a class="button secondary" href="/guides/">Browse all guides</a></div>
+      <div class="guide-grid">
+        {guides.slice(0, 6).map((guide) => (
+          <a class="guide-card" href={`/guides/${guide.slug}/`}>
+            <span class="meta"><span>{guide.category.replace('-', ' ')}</span><span>{guide.readingTime}</span></span>
+            <h3>{guide.title}</h3><p>{guide.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="shell cta-band">
+      <h2>Start with the project that is already on your list.</h2>
+      <a class="button light" href="/calculators/paint/">Open paint planner <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+</BaseLayout>

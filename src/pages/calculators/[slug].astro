@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectPlanner from '../../components/ProjectPlanner.vue';
+import ToolIcon from '../../components/ToolIcon.astro';
+import { SITE, absolute, calculators, guideBySlug, type CalculatorDefinition } from '../../data/site';
+
+export function getStaticPaths() { return calculators.map((calculator) => ({ params: { slug: calculator.slug }, props: { calculator } })); }
+interface Props { calculator: CalculatorDefinition }
+const { calculator } = Astro.props;
+const path = `/calculators/${calculator.slug}/`;
+const relatedGuides = calculator.guides.map((slug) => guideBySlug[slug]).filter(Boolean);
+const jsonLd = [
+  { '@type': 'WebApplication', name: calculator.name, description: calculator.description, url: absolute(path), applicationCategory: 'UtilitiesApplication', operatingSystem: 'Any modern web browser', browserRequirements: 'Requires JavaScript', isAccessibleForFree: true, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, featureList: calculator.features },
+  { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: SITE.origin }, { '@type': 'ListItem', position: 2, name: 'Calculators', item: absolute('/calculators/') }, { '@type': 'ListItem', position: 3, name: calculator.name, item: absolute(path) }] },
+  { '@type': 'FAQPage', mainEntity: calculator.faq.map((item) => ({ '@type': 'Question', name: item.question, acceptedAnswer: { '@type': 'Answer', text: item.answer } })) },
+];
+---
+<BaseLayout title={calculator.name} description={calculator.description} path={path} jsonLd={jsonLd}>
+  <header class="page-hero"><div class="shell calculator-hero"><div><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span><a href="/calculators/">Calculators</a></span><span>{calculator.shortName}</span></nav><p class="eyebrow">{calculator.eyebrow}</p><h1>{calculator.name}</h1><p class="lead">{calculator.description}</p><div class="trust-row"><span>No signup</span><span>Local save</span><span>Shareable link</span><span>Print to PDF</span></div></div><div class="hero-tool-icon" style={`--accent:${calculator.accent}`}><ToolIcon type={calculator.icon} /></div></div></header>
+
+  <section class="section calculator-workspace"><div class="shell"><ProjectPlanner kind={calculator.slug} accent={calculator.accent} client:only="vue" /><noscript><div class="disclaimer">The interactive calculator needs JavaScript. The formulas, assumptions, examples, and guides below remain available.</div></noscript></div></section>
+
+  <div class="shell"><div class="ad-slot print-hidden" aria-label="Reserved ad space"><span>Reserved ad space</span></div></div>
+
+  <section class="section"><div class="shell content-grid"><article class="prose">
+    <p class="eyebrow">Understand the estimate</p><h2>Formula and assumptions</h2><p>{calculator.formula}</p><div class="formula-card"><p class="formula">{calculator.formula}</p></div>
+    <h3>Assumptions to confirm</h3><ul>{calculator.assumptions.map((item) => <li>{item}</li>)}</ul>
+    <div class="measurement-diagram" aria-label={`Conceptual measurement diagram for ${calculator.shortName}`} style={`--accent:${calculator.accent}`}><div class="diagram-shape"><span class="dimension dim-a">length</span><span class="dimension dim-b">width</span><span class="diagram-cutout"></span></div><div><strong>Break the project into simple shapes.</strong><p>Label every measurement and keep exclusions visible. Add the shapes in the calculator instead of hiding them inside one total.</p></div></div>
+    <h2>Worked example</h2><div class="example-card"><h3>Input</h3><p>{calculator.example.input}</p><h3>Planning result</h3><p>{calculator.example.result}</p></div>
+    <div class="ad-slot compact print-hidden" aria-label="Reserved ad space"><span>Reserved ad space</span></div>
+    <h2>Common package sizes</h2><p>Package conventions vary by brand and region. Enter the usable coverage or yield shown on the actual product instead of relying on the name or weight alone.</p><ul>{calculator.packages.map((item) => <li>{item}</li>)}</ul>
+    <h2>Frequently asked questions</h2><div class="faq-list">{calculator.faq.map((item) => <details><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div>
+    <div class="disclaimer"><strong>Planning estimate:</strong> Confirm package coverage, installation instructions, site conditions, safety requirements, and local codes before purchasing or starting work.</div>
+    <h2>Related measurement guides</h2><div class="guide-grid">{relatedGuides.map((guide) => <a class="guide-card" href={`/guides/${guide.slug}/`}><span class="meta"><span>Guide</span><span>{guide.readingTime}</span></span><h3>{guide.title}</h3><p>{guide.description}</p></a>)}</div>
+  </article><aside class="sidebar print-hidden"><div class="note-card"><h2>Result modes</h2><p><strong>Exact:</strong> the mathematical requirement before package rounding.</p><p><strong>Shopping:</strong> whole containers, boxes, bags, panels, or posts.</p></div><div class="note-card"><h2>Privacy boundary</h2><p>Saving writes to this browser. Sharing places the project inputs in the URL. Do not include confidential details in project names.</p></div></aside></div></section>
+</BaseLayout>
+
+<style>
+.calculator-hero { display: grid; grid-template-columns: 1fr 230px; align-items: center; gap: 3rem; }
+.calculator-hero h1 { font-size: clamp(2.7rem, 6vw, 5.2rem); }
+.hero-tool-icon { color: var(--accent); padding: 2rem; border-radius: 28px; background: var(--white); border: 1px solid var(--line); box-shadow: 12px 12px 0 var(--accent); }
+.calculator-workspace { padding-bottom: 2rem; }
+.measurement-diagram { display: grid; grid-template-columns: 220px 1fr; gap: 2rem; align-items: center; margin: 2rem 0; padding: 1.5rem; border: 1px solid var(--line); border-radius: 16px; background: var(--white); }
+.diagram-shape { position: relative; width: 190px; height: 130px; border: 4px solid var(--accent); background: repeating-linear-gradient(0deg, transparent 0 19px, #d8d0c744 20px), repeating-linear-gradient(90deg, transparent 0 19px, #d8d0c744 20px); }
+.diagram-cutout { position: absolute; width: 45px; height: 35px; right: -4px; bottom: -4px; border: 4px solid var(--ink); background: var(--white); }
+.dimension { position: absolute; font: 800 .7rem/1 ui-monospace, monospace; color: var(--muted); }
+.dim-a { bottom: -1.5rem; left: 38%; }.dim-b { left: -2rem; top: 45%; transform: rotate(-90deg); }
+@media (max-width:700px) { .calculator-hero { grid-template-columns: 1fr; }.hero-tool-icon { display:none; }.measurement-diagram { grid-template-columns: 1fr; }.diagram-shape { width: min(190px, 85%); } }
+</style>

@@ -1,0 +1,14 @@
+---
+import type { CalculatorDefinition } from '../data/site';
+import ToolIcon from './ToolIcon.astro';
+interface Props { calculator: CalculatorDefinition; index: number }
+const { calculator, index } = Astro.props;
+---
+
+<a class="tool-card" href={`/calculators/${calculator.slug}/`} style={`--accent:${calculator.accent}`}>
+  <span class="number">0{index + 1}</span>
+  <span class="arrow" aria-hidden="true">↗</span>
+  <div class="tool-icon"><ToolIcon type={calculator.icon} /></div>
+  <h3>{calculator.shortName}</h3>
+  <p>{calculator.eyebrow}</p>
+</a>
