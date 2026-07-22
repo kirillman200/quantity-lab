@@ -36,6 +36,8 @@ describe('built public contract', () => {
       expect((html.match(/<h1(?:\s[^>]*)?>/gi) ?? []).length).toBe(1);
       expect(html).toContain('property="og:image"');
       expect(html).toContain('application/ld+json');
+      expect(html).toContain('<link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="16x16 32x32 48x48">');
+      expect(html).toContain('<link rel="icon" href="/favicon.svg" type="image/svg+xml">');
       expect(html).toContain('<meta name="google-adsense-account" content="ca-pub-7469113252837951">');
       expect(html).toContain('src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7469113252837951"');
       expect(titles.has(title), `duplicate title: ${title}`).toBe(false);
@@ -76,6 +78,13 @@ describe('built public contract', () => {
     expect(privacy).toContain('Google-certified consent management platform');
     const headers = readFileSync(join(dist, '_headers'), 'utf8');
     expect(headers).toContain("script-src 'self' 'unsafe-inline' 'unsafe-eval' https: http:");
+  });
+
+  it('publishes SVG and conventional favicon assets', () => {
+    expect(readFileSync(join(dist, 'favicon.svg'), 'utf8')).toContain('<svg');
+    const ico = readFileSync(join(dist, 'favicon.ico'));
+    expect(ico.subarray(0, 4)).toEqual(Buffer.from([0, 0, 1, 0]));
+    expect(ico.readUInt16LE(4)).toBe(3);
   });
 
   it('uses only the standard reserved ad-space label', () => {
