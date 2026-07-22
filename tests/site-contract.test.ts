@@ -17,6 +17,7 @@ describe('built public contract', () => {
     expect(wrangler.main).toBe('./src/worker.ts');
     expect(wrangler.assets.directory).toBe('./dist');
     expect(wrangler.assets.binding).toBe('ASSETS');
+    expect(wrangler.assets.run_worker_first).toBe(true);
   });
 
   it('builds every canonical public route with metadata and one h1', () => {
