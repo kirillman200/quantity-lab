@@ -8,6 +8,15 @@ const routeFile = (path: string) => path === '/' ? join(dist, 'index.html') : jo
 const extract = (html: string, pattern: RegExp) => html.match(pattern)?.[1]?.trim() ?? '';
 
 describe('built public contract', () => {
+  it('pins the release to the production origin and private deployment boundary', () => {
+    expect(SITE.origin).toBe('https://home.utilitas.app');
+    const wrangler = JSON.parse(readFileSync(join(process.cwd(), 'wrangler.jsonc'), 'utf8'));
+    expect(wrangler.workers_dev).toBe(false);
+    expect(wrangler.preview_urls).toBe(false);
+    expect(wrangler.routes).toEqual([{ pattern: 'home.utilitas.app', custom_domain: true }]);
+    expect(wrangler.assets.directory).toBe('./dist');
+  });
+
   it('builds every canonical public route with metadata and one h1', () => {
     const titles = new Set<string>();
     const descriptions = new Set<string>();

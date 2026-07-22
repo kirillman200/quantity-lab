@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 import vue from '@astrojs/vue';
 
 export default defineConfig({
-  site: 'https://project-quantity-lab.workers.dev',
+  site: 'https://home.utilitas.app',
   output: 'static',
   trailingSlash: 'always',
   integrations: [vue()],

@@ -1,8 +1,8 @@
 export const SITE = {
   name: 'Project Quantity Lab',
-  origin: 'https://project-quantity-lab.workers.dev',
+  origin: 'https://home.utilitas.app',
   description: 'Free, product-neutral calculators for home project materials, costs, and printable shopping lists.',
-  updated: '2026-07-20',
+  updated: '2026-07-22',
 } as const;
 
 export type CalculatorSlug = 'paint' | 'flooring-tile' | 'landscape-materials' | 'concrete' | 'fence';

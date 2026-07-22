@@ -1,6 +1,7 @@
 # Project Quantity Lab site contract
 
-- Production origin: `https://project-quantity-lab.workers.dev` until a custom domain is connected.
+- Production origin: `https://home.utilitas.app`.
+- Hosting contract: Cloudflare Workers Static Assets serves only `dist/` through the custom domain. The `workers.dev` route and preview URLs are disabled.
 - Product promise: Help homeowners calculate material quantities, costs, and a practical shopping list without an account.
 - Public routes: Defined once in `src/data/site.ts`; navigation, sitemap, `llms.txt`, and regression tests consume that inventory.
 - Private surface: Source, dependencies, tests, environment files, Git metadata, build tooling, and local logs. Only `dist/` is deployed.

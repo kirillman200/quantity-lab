@@ -4,6 +4,11 @@
   "version": "1.0.0",
   "private": true,
   "description": "Product-neutral home project material, cost, and shopping-list calculators.",
+  "homepage": "https://home.utilitas.app/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kirillman200/Project-Quantity-Lab.git"
+  },
   "engines": {
     "node": ">=22.12.0"
   },
