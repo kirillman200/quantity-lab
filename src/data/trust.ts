@@ -30,13 +30,15 @@ export const trustPages: TrustPage[] = [
   },
   {
     slug: 'privacy', title: 'Privacy', eyebrow: 'Your project can stay yours',
-    description: 'How Project Quantity Lab handles local project data, share links, logs, and future third parties.',
-    intro: 'Project Quantity Lab does not require an account. Calculator inputs are processed in your browser. The launch version has no analytics, advertising, or consent scripts.',
+    description: 'How Project Quantity Lab handles local project data, share links, hosting logs, advertising, and consent.',
+    intro: 'Project Quantity Lab does not require an account. Calculator inputs are processed in your browser. Public pages include Google AdSense code to verify the publisher account and support advertising.',
     sections: [
       { heading: 'Local saves', paragraphs: ['When you choose Save, the project is written to localStorage in the current browser. It is not uploaded to Project Quantity Lab. You can remove an individual save in the planner or clear all saved projects from the footer.'] },
       { heading: 'Share links', paragraphs: ['When you choose Share, a compact copy of the project inputs is placed in the URL query string. Anyone who receives that URL can read the encoded project details. Do not put confidential names, addresses, or notes in a share link.'] },
       { heading: 'Hosting logs', paragraphs: ['Cloudflare may process ordinary request information needed to deliver and protect the site, such as IP address, user agent, requested URL, timestamps, and security signals, under its applicable terms and policies. Calculator inputs are not sent as request bodies, but shared URL parameters are part of the requested URL.'] },
-      { heading: 'Future advertising or analytics', paragraphs: ['If third-party advertising, analytics, or consent tools are introduced, this policy and the site’s consent behavior must be updated before those tools load. Reserved ad spaces currently contain no ad code.'] },
+      { heading: 'Google AdSense', paragraphs: ['The site loads Google AdSense code using publisher ID ca-pub-7469113252837951. Google and its advertising partners may process device, browser, IP address, page, cookie or local-storage, consent, and ad-interaction data under their applicable policies. Shared URL parameters are part of the page address and may be included in third-party requests, so share links must not contain confidential information.'] },
+      { heading: 'Consent and advertising choices', paragraphs: ['Where required, advertising storage and personalization must be controlled through Google Privacy & messaging or another Google-certified consent management platform. The site owner is responsible for keeping that account-level configuration active for applicable regions. Browser privacy controls or content blockers may prevent advertising code from loading.'] },
+      { heading: 'Analytics', paragraphs: ['The site does not include a standalone analytics product at this time. AdSense can still provide advertising measurement and reporting as part of its service. Reserved ad-space labels remain layout placeholders unless Google Auto ads or a configured ad unit fills a placement.'] },
     ],
   },
   {

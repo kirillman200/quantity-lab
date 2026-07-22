@@ -25,3 +25,7 @@ npm run deploy
 ```
 
 The production origin is configured in `astro.config.mjs`. A minimal Worker enforces HTTPS, then Cloudflare Workers Static Assets serves only `dist/` on the `home.utilitas.app` custom domain. The `workers.dev` route and preview URLs are disabled. Calculations are planning estimates; confirm package coverage and local requirements before purchasing.
+
+## Advertising
+
+The site publishes Google AdSense verification for `ca-pub-7469113252837951` and the corresponding root `ads.txt` record. The Worker adds a fresh nonce to every HTML script and returns an AdSense-compatible CSP. Consent for applicable regions must be configured in AdSense Privacy & messaging or another Google-certified CMP before personalized ads are served there.

@@ -36,6 +36,8 @@ describe('built public contract', () => {
       expect((html.match(/<h1(?:\s[^>]*)?>/gi) ?? []).length).toBe(1);
       expect(html).toContain('property="og:image"');
       expect(html).toContain('application/ld+json');
+      expect(html).toContain('<meta name="google-adsense-account" content="ca-pub-7469113252837951">');
+      expect(html).toContain('src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7469113252837951"');
       expect(titles.has(title), `duplicate title: ${title}`).toBe(false);
       expect(descriptions.has(description), `duplicate description: ${description}`).toBe(false);
       titles.add(title); descriptions.add(description);
@@ -65,6 +67,15 @@ describe('built public contract', () => {
   it('builds a noindex offline page and custom 404', () => {
     expect(readFileSync(join(dist, 'offline', 'index.html'), 'utf8')).toContain('content="noindex, follow"');
     expect(readFileSync(join(dist, '404.html'), 'utf8')).toContain('content="noindex, follow"');
+  });
+
+  it('publishes the authorized AdSense seller and accurate advertising disclosures', () => {
+    expect(readFileSync(join(dist, 'ads.txt'), 'utf8').trim()).toBe('google.com, pub-7469113252837951, DIRECT, f08c47fec0942fa0');
+    const privacy = readFileSync(routeFile('/privacy/'), 'utf8');
+    expect(privacy).toContain('Google AdSense');
+    expect(privacy).toContain('Google-certified consent management platform');
+    const headers = readFileSync(join(dist, '_headers'), 'utf8');
+    expect(headers).toContain("script-src 'self' 'unsafe-inline' 'unsafe-eval' https: http:");
   });
 
   it('uses only the standard reserved ad-space label', () => {

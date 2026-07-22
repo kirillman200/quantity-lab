@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import worker from '../src/worker';
+import worker, { buildContentSecurityPolicy } from '../src/worker';
 
 const createEnv = () => {
   const assets = {
@@ -13,6 +13,14 @@ const createEnv = () => {
 };
 
 describe('production worker', () => {
+  it('builds a nonce-based AdSense-compatible content security policy', () => {
+    const policy = buildContentSecurityPolicy('testnonce');
+
+    expect(policy).toContain("script-src 'nonce-testnonce' 'unsafe-inline' 'unsafe-eval' 'strict-dynamic' https: http:");
+    expect(policy).toContain("object-src 'none'");
+    expect(policy).toContain("frame-ancestors 'none'");
+  });
+
   it('permanently redirects HTTP requests to the same HTTPS URL', async () => {
     const { assets, env } = createEnv();
     const response = await worker.fetch(new Request('http://home.utilitas.app/guides/?topic=paint'), env);
