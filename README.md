@@ -24,4 +24,4 @@ npm run deploy:dry
 npm run deploy
 ```
 
-The production origin is configured in `astro.config.mjs`. Cloudflare Workers Static Assets publishes only `dist/` to the `home.utilitas.app` custom domain, with the `workers.dev` route and preview URLs disabled. Calculations are planning estimates; confirm package coverage and local requirements before purchasing.
+The production origin is configured in `astro.config.mjs`. A minimal Worker enforces HTTPS, then Cloudflare Workers Static Assets serves only `dist/` on the `home.utilitas.app` custom domain. The `workers.dev` route and preview URLs are disabled. Calculations are planning estimates; confirm package coverage and local requirements before purchasing.

@@ -14,7 +14,9 @@ describe('built public contract', () => {
     expect(wrangler.workers_dev).toBe(false);
     expect(wrangler.preview_urls).toBe(false);
     expect(wrangler.routes).toEqual([{ pattern: 'home.utilitas.app', custom_domain: true }]);
+    expect(wrangler.main).toBe('./src/worker.ts');
     expect(wrangler.assets.directory).toBe('./dist');
+    expect(wrangler.assets.binding).toBe('ASSETS');
   });
 
   it('builds every canonical public route with metadata and one h1', () => {

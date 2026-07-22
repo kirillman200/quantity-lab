@@ -17,7 +17,6 @@ coverage/
 .dev.vars
 .DS_Store
 *.log
-worker-configuration.d.ts
 
 # logs
 npm-debug.log*
