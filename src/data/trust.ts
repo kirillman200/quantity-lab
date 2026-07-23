@@ -4,7 +4,7 @@ export interface TrustPage {
   description: string;
   eyebrow: string;
   intro: string;
-  sections: Array<{ heading: string; paragraphs: string[]; bullets?: string[] }>;
+  sections: Array<{ heading: string; paragraphs: string[]; bullets?: string[]; link?: { href: string; label: string } }>;
 }
 
 export const trustPages: TrustPage[] = [
@@ -24,7 +24,7 @@ export const trustPages: TrustPage[] = [
     intro: 'Clear reports make the calculators better. When reporting a calculation concern, include the calculator, unit system, inputs, expected result, actual result, and the product coverage or yield you used.',
     sections: [
       { heading: 'General and calculation feedback', paragraphs: ['A public feedback channel is not configured yet. Until one is published here, do not send private project documents or sensitive personal information to anyone claiming to represent Project Quantity Lab.'] },
-      { heading: 'Security reports', paragraphs: ['A public security-reporting channel is not configured yet. This page will be updated before reports are accepted; never include credentials, private project details, or personal information in an unsolicited report.'] },
+      { heading: 'Security reports', paragraphs: ['Report suspected vulnerabilities confidentially through the Project Quantity Lab GitHub Security Advisory form. Do not open a public issue for an unpatched vulnerability or include credentials, personal information, or data that does not belong to you.'] },
       { heading: 'Accessibility feedback', paragraphs: ['Describe the page, device, browser, assistive technology, and the task you could not complete. A screenshot is helpful when it does not contain private information.'] },
     ],
   },
@@ -59,7 +59,11 @@ export const trustPages: TrustPage[] = [
     sections: [
       { heading: 'Browser-only architecture', paragraphs: ['There is no application server, database, authentication system, file upload, or protected API. Vue renders user labels as text, inputs are length- and range-bounded, and shared state has a strict size and shape limit.'] },
       { heading: 'Response protections', paragraphs: ['Production responses use a Content Security Policy, clickjacking protection, MIME-sniffing protection, a restrictive permissions policy, same-origin resource policy, and a privacy-preserving referrer policy.'] },
-      { heading: 'Report a vulnerability', paragraphs: ['A public security-reporting channel is not configured yet. Do not test in a way that degrades availability or accesses data that is not yours. This page will be updated when a dedicated reporting channel is available.'] },
+      {
+        heading: 'Report a vulnerability',
+        paragraphs: ['Report suspected vulnerabilities confidentially through the Project Quantity Lab GitHub Security Advisory form. Include the affected URL or component, reproduction steps, observed impact, and any suggested remediation. Do not open a public issue for an unpatched vulnerability. Do not test in a way that degrades availability, accesses data that is not yours, uses social engineering, or causes destructive changes.'],
+        link: { href: 'https://github.com/kirillman200/quantity-lab/security/advisories/new', label: 'Open the private vulnerability report form' },
+      },
     ],
   },
   {

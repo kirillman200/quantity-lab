@@ -14,3 +14,6 @@
 /sw.js
   Cache-Control: no-cache
   Service-Worker-Allowed: /
+
+/.well-known/security.txt
+  Cache-Control: public, max-age=86400
