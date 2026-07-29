@@ -30,6 +30,7 @@ const organization = {
   '@id': `${SITE.origin}/#organization`,
   name: SITE.name,
   url: SITE.origin,
+  email: SITE.contactEmail,
   logo: absolute('/favicon.svg'),
 };
 const graph = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
@@ -119,6 +120,7 @@ const graph = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
           <a href="/guides/">Project guides</a>
           <a href="/about/">About</a>
           <a href="/contact/">Contact</a>
+          <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>
           <a href="/access/">Access</a>
         </div>
         <div>

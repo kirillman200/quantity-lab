@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "project-quantity-planner",
+      "type": "skill-md",
+      "description": "Use Project Quantity Lab's browser-local calculators to create auditable home project material, cost, and shopping-list estimates.",
+      "url": "https://home.utilitas.app/.well-known/agent-skills/project-quantity-planner/SKILL.md",
+      "digest": "sha256:a1721dc03e358dbeb5caff11fbdf1c52d1284f52002ae7a8280c7e860e7346e6"
+    }
+  ]
+}

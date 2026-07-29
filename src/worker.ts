@@ -1,3 +1,11 @@
+import {
+  CONTENT_SIGNAL,
+  HOMEPAGE_DISCOVERY_LINKS,
+  acceptsMarkdown,
+  appendVary,
+  createMarkdownResponse,
+} from './agent-discovery';
+
 export const buildContentSecurityPolicy = (nonce: string) => [
   "default-src 'self'",
   "base-uri 'self'",
@@ -24,19 +32,43 @@ export default {
     }
 
     const response = await env.ASSETS.fetch(request);
-    if (!response.headers.get('Content-Type')?.startsWith('text/html')) return response;
-
-    const nonce = crypto.randomUUID().replaceAll('-', '');
     const headers = new Headers(response.headers);
+    headers.set('Content-Signal', CONTENT_SIGNAL);
+    if (url.pathname === '/' || url.pathname === '/index.html') {
+      headers.set('Link', HOMEPAGE_DISCOVERY_LINKS);
+    }
+    if (url.pathname === '/.well-known/security.txt') {
+      headers.set('Content-Type', 'text/plain; charset=utf-8');
+    }
+    if (url.pathname.endsWith('.md')) {
+      headers.set('Content-Type', 'text/markdown; charset=utf-8');
+    }
+
+    if (!headers.get('Content-Type')?.startsWith('text/html')) {
+      return new Response(request.method === 'HEAD' ? null : response.body, {
+        status: response.status,
+        statusText: response.statusText,
+        headers,
+      });
+    }
+
     headers.delete('Content-Length');
     headers.delete('ETag');
+    appendVary(headers, 'Accept');
+    if (acceptsMarkdown(request.headers.get('Accept') || '')) {
+      return createMarkdownResponse(response, headers, await response.text(), request.method);
+    }
+
+    const nonce = crypto.randomUUID().replaceAll('-', '');
     headers.set('Content-Security-Policy', buildContentSecurityPolicy(nonce));
 
-    const htmlResponse = new Response(response.body, {
+    const htmlResponse = new Response(request.method === 'HEAD' ? null : response.body, {
       status: response.status,
       statusText: response.statusText,
       headers,
     });
+
+    if (request.method === 'HEAD') return htmlResponse;
 
     return new HTMLRewriter()
       .on('script', {

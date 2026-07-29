@@ -1,9 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { publicRoutes, SITE } from '../src/data/site';
 
 const dist = join(process.cwd(), 'dist');
+const indexNowKey = 'e09e056626954935beae46d6a88ea697';
 const routeFile = (path: string) => path === '/' ? join(dist, 'index.html') : join(dist, path.replace(/^\//, ''), 'index.html');
 const extract = (html: string, pattern: RegExp) => html.match(pattern)?.[1]?.trim() ?? '';
 
@@ -50,10 +53,69 @@ describe('built public contract', () => {
     const sitemap = readFileSync(join(dist, 'sitemap.xml'), 'utf8');
     const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
     expect(urls).toEqual(publicRoutes.map((route) => new URL(route.path, SITE.origin).toString()));
-    expect(readFileSync(join(dist, 'robots.txt'), 'utf8')).toContain(`${SITE.origin}/sitemap.xml`);
+    const robots = readFileSync(join(dist, 'robots.txt'), 'utf8');
+    expect(robots).toContain(`${SITE.origin}/sitemap.xml`);
+    expect(robots).toContain('Content-Signal: ai-train=no, search=yes, ai-input=yes');
     const llms = readFileSync(join(dist, 'llms.txt'), 'utf8');
     for (const route of publicRoutes.filter((route) => route.path !== '/')) expect(llms).toContain(new URL(route.path, SITE.origin).toString());
     expect(llms).toContain('No registration, credentials, server API, OAuth, MCP, A2A, or remote-agent endpoint exists.');
+  });
+
+  it('publishes IndexNow ownership and prepares a safe sitemap notification', () => {
+    expect(indexNowKey).toMatch(/^[A-Za-z0-9-]{8,128}$/);
+    expect(
+      readFileSync(join(dist, `${indexNowKey}.txt`), 'utf8').trim(),
+    ).toBe(indexNowKey);
+
+    const result = spawnSync(process.execPath, ['scripts/submit-indexnow.mjs'], {
+      cwd: process.cwd(),
+      encoding: 'utf8',
+    });
+    expect(result.status, result.stderr).toBe(0);
+    expect(result.stdout).toContain('Prepared IndexNow request (not sent)');
+
+    const jsonStart = result.stdout.indexOf('{');
+    const jsonEnd = result.stdout.lastIndexOf('}') + 1;
+    const payload = JSON.parse(result.stdout.slice(jsonStart, jsonEnd));
+    const sitemap = readFileSync(join(dist, 'sitemap.xml'), 'utf8');
+    const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(
+      (match) => match[1],
+    );
+
+    expect(payload).toEqual({
+      host: 'home.utilitas.app',
+      key: indexNowKey,
+      keyLocation: `${SITE.origin}/${indexNowKey}.txt`,
+      urlList: sitemapUrls,
+    });
+
+    const scripts = JSON.parse(
+      readFileSync(join(process.cwd(), 'package.json'), 'utf8'),
+    ).scripts;
+    expect(scripts.deploy).toContain('node scripts/submit-indexnow.mjs --send');
+  });
+
+  it('publishes a valid Agent Skills discovery index with a matching digest', () => {
+    const index = JSON.parse(
+      readFileSync(join(dist, '.well-known', 'agent-skills', 'index.json'), 'utf8'),
+    );
+    expect(index.$schema).toBe('https://schemas.agentskills.io/discovery/0.2.0/schema.json');
+    expect(index.skills).toHaveLength(1);
+    const skill = index.skills[0];
+    expect(skill).toMatchObject({
+      name: 'project-quantity-planner',
+      type: 'skill-md',
+      url: 'https://home.utilitas.app/.well-known/agent-skills/project-quantity-planner/SKILL.md',
+    });
+    const skillPath = join(
+      dist,
+      '.well-known',
+      'agent-skills',
+      'project-quantity-planner',
+      'SKILL.md',
+    );
+    const digest = createHash('sha256').update(readFileSync(skillPath)).digest('hex');
+    expect(skill.digest).toBe(`sha256:${digest}`);
   });
 
   it('publishes security files and excludes private artifacts and source maps', () => {
@@ -62,6 +124,8 @@ describe('built public contract', () => {
     const headers = readFileSync(join(dist, '_headers'), 'utf8');
     for (const header of ['Content-Security-Policy', 'Strict-Transport-Security', 'X-Content-Type-Options', 'X-Frame-Options', 'Permissions-Policy']) expect(headers).toContain(header);
     const securityTxt = readFileSync(join(dist, '.well-known', 'security.txt'), 'utf8');
+    expect(SITE.contactEmail).toBe('contact@home.utilitas.app');
+    expect(securityTxt).toContain('Contact: mailto:contact@home.utilitas.app');
     expect(securityTxt).toContain('Contact: https://github.com/kirillman200/quantity-lab/security/advisories/new');
     expect(securityTxt).toContain('Canonical: https://home.utilitas.app/.well-known/security.txt');
     expect(securityTxt).toContain('Policy: https://home.utilitas.app/security/');
@@ -75,6 +139,8 @@ describe('built public contract', () => {
     const securityPolicy = readFileSync(routeFile('/security/'), 'utf8');
     expect(securityPolicy).toContain('href="https://github.com/kirillman200/quantity-lab/security/advisories/new"');
     expect(securityPolicy).toContain('Last reviewed:</strong> July 23, 2026');
+    expect(readFileSync(routeFile('/'), 'utf8')).toContain('href="mailto:contact@home.utilitas.app"');
+    expect(readFileSync(routeFile('/contact/'), 'utf8')).toContain('href="mailto:contact@home.utilitas.app"');
     for (const path of ['package.json', 'package-lock.json', 'wrangler.jsonc', 'README.md', 'SECURITY.md', '.git', 'tests', 'src']) expect(existsSync(join(dist, path)), `${path} must not deploy`).toBe(false);
     const walk = (directory: string): string[] => readdirSync(directory).flatMap((name: string) => { const path = join(directory, name); return statSync(path).isDirectory() ? walk(path) : [path]; });
     expect(walk(dist).some((file) => file.endsWith('.map'))).toBe(false);

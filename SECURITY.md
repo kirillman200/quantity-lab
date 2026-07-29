@@ -1,6 +1,6 @@
 # Security policy
 
-Report suspected vulnerabilities privately through the [GitHub Security Advisory form](https://github.com/kirillman200/quantity-lab/security/advisories/new). Do not open a public issue for an unpatched vulnerability.
+Report suspected vulnerabilities through [contact@home.utilitas.app](mailto:contact@home.utilitas.app) or privately through the [GitHub Security Advisory form](https://github.com/kirillman200/quantity-lab/security/advisories/new). Do not open a public issue for an unpatched vulnerability.
 
 Include the affected URL or component, the steps needed to reproduce the issue, the observed impact, and any suggested remediation. Do not include credentials, private project details, personal information, or data that does not belong to you.
 

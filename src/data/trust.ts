@@ -1,3 +1,5 @@
+import { SITE } from './site';
+
 export interface TrustPage {
   slug: string;
   title: string;
@@ -23,9 +25,9 @@ export const trustPages: TrustPage[] = [
     description: 'Send calculator feedback, correction details, accessibility notes, or security reports.',
     intro: 'Clear reports make the calculators better. When reporting a calculation concern, include the calculator, unit system, inputs, expected result, actual result, and the product coverage or yield you used.',
     sections: [
-      { heading: 'General and calculation feedback', paragraphs: ['A public feedback channel is not configured yet. Until one is published here, do not send private project documents or sensitive personal information to anyone claiming to represent Project Quantity Lab.'] },
+      { heading: 'General and calculation feedback', paragraphs: ['Email the dedicated contact address with the calculator, unit system, inputs, expected result, and actual result. Do not attach private project documents or sensitive personal information.'], link: { href: `mailto:${SITE.contactEmail}`, label: SITE.contactEmail } },
       { heading: 'Security reports', paragraphs: ['Report suspected vulnerabilities confidentially through the Project Quantity Lab GitHub Security Advisory form. Do not open a public issue for an unpatched vulnerability or include credentials, personal information, or data that does not belong to you.'] },
-      { heading: 'Accessibility feedback', paragraphs: ['Describe the page, device, browser, assistive technology, and the task you could not complete. A screenshot is helpful when it does not contain private information.'] },
+      { heading: 'Accessibility feedback', paragraphs: ['Describe the page, device, browser, assistive technology, and the task you could not complete. A screenshot is helpful when it does not contain private information.'], link: { href: `mailto:${SITE.contactEmail}`, label: SITE.contactEmail } },
     ],
   },
   {

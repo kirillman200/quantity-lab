@@ -25,7 +25,9 @@
     "test:e2e": "node tests/run-e2e.mjs",
     "validate": "npm run check && npm run test:unit && npm run build && npm run test:site",
     "deploy:dry": "npm run build && wrangler deploy --dry-run",
-    "deploy": "npm run validate && wrangler deploy"
+    "indexnow": "npm run build && node scripts/submit-indexnow.mjs",
+    "indexnow:send": "npm run build && node scripts/submit-indexnow.mjs --send",
+    "deploy": "npm run validate && wrangler deploy && node scripts/submit-indexnow.mjs --send"
   },
   "dependencies": {
     "@astrojs/vue": "^7.0.1",
