@@ -9,6 +9,7 @@ export function GET() {
     '',
     '## Calculators',
     '',
+    line('/calculators/paint-coverage/', 'Paint Coverage Calculator', 'Calculate coverage for gallons, quarts, litres, and spray cans after coats and contingency.'),
     ...calculators.map((item) => line(`/calculators/${item.slug}/`, item.name, item.description)),
     '',
     '## Guides',

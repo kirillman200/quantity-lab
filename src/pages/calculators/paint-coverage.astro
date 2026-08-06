@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PaintCoverageCalculator from '../../components/PaintCoverageCalculator.vue';
+import { SITE, absolute, guideBySlug } from '../../data/site';
+
+const path = '/calculators/paint-coverage/';
+const title = 'Paint Coverage Calculator for Gallons, Quarts, Litres, and Spray Cans';
+const description = 'Calculate how many square feet or square metres a quart, gallon, five-gallon pail, litre, or spray can will cover after coats and contingency.';
+const relatedGuides = ['paint-coverage', 'spray-paint-coverage', 'measure-room-for-paint'].map((slug) => guideBySlug[slug]).filter(Boolean);
+const faq = [
+  { question: 'How much does one gallon of paint cover?', answer: 'A common planning value is 350 to 400 square feet for one coat, but the product label is authoritative. Some products publish a different spread rate.' },
+  { question: 'How much does a five-gallon bucket of paint cover?', answer: 'At 400 square feet per gallon, five gallons has a theoretical one-coat area of 2,000 square feet. Two coats reduce that to 1,000 square feet before contingency.' },
+  { question: 'How much does one quart of paint cover?', answer: 'One US quart is one quarter of a US gallon. At 400 square feet per gallon, one quart has a theoretical one-coat area of 100 square feet.' },
+  { question: 'How much does one litre of paint cover?', answer: 'At 400 square feet per US gallon, one litre has a theoretical one-coat area of about 105.7 square feet or 9.8 square metres.' },
+  { question: 'How much does one can of spray paint cover?', answer: 'Spray-can coverage varies widely by product, colour, surface, and application. Enter the area printed on the can, then account for every coat and overspray contingency.' },
+];
+const jsonLd = [
+  { '@type': 'WebApplication', name: title, description, url: absolute(path), applicationCategory: 'UtilitiesApplication', operatingSystem: 'Any modern web browser', browserRequirements: 'Requires JavaScript', isAccessibleForFree: true, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, featureList: ['US gallon, US quart, and litre conversion', 'Spray-can coverage mode', 'Multiple coats', 'Contingency allowance', 'Square feet and square metres'] },
+  { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: SITE.origin }, { '@type': 'ListItem', position: 2, name: 'Calculators', item: absolute('/calculators/') }, { '@type': 'ListItem', position: 3, name: 'Paint coverage', item: absolute(path) }] },
+  { '@type': 'FAQPage', mainEntity: faq.map((item) => ({ '@type': 'Question', name: item.question, acceptedAnswer: { '@type': 'Answer', text: item.answer } })) },
+];
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <header class="page-hero"><div class="shell"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span><a href="/calculators/">Calculators</a></span><span>Paint coverage</span></nav><p class="eyebrow">Cans, pails, litres, and spray paint</p><h1>Paint coverage calculator</h1><p class="lead">Convert the product label into one-coat coverage and a practical project area after multiple coats and contingency.</p><div class="trust-row"><span>No signup</span><span>Product neutral</span><span>Metric + imperial</span><span>Instant result</span></div></div></header>
+
+  <section class="section calculator-workspace"><div class="shell"><PaintCoverageCalculator client:only="vue" /><noscript><div class="disclaimer">The interactive calculator needs JavaScript. The reference values and formula below remain available.</div></noscript></div></section>
+
+  <div class="shell"><div class="ad-slot print-hidden" aria-label="Reserved ad space"><span>Reserved ad space</span></div></div>
+
+  <section class="section"><div class="shell content-grid"><article class="prose">
+    <p class="eyebrow">Direct answers</p><h2>Paint coverage by container size</h2>
+    <p>Wall-paint coverage is normally stated per coat. Using 400 square feet per US gallon as an example, the theoretical one-coat areas are:</p>
+    <div class="reference-table" role="region" aria-label="Paint coverage example table" tabindex="0"><table><thead><tr><th>Container</th><th>One coat</th><th>Two coats</th></tr></thead><tbody><tr><td>1 US quart</td><td>100 sq ft</td><td>50 sq ft</td></tr><tr><td>1 US gallon</td><td>400 sq ft</td><td>200 sq ft</td></tr><tr><td>5 US gallons</td><td>2,000 sq ft</td><td>1,000 sq ft</td></tr><tr><td>1 litre</td><td>105.7 sq ft / 9.8 m²</td><td>52.8 sq ft / 4.9 m²</td></tr></tbody></table></div>
+    <p>These are mathematical conversions, not promises for every coating. For example, Benjamin Moore currently publishes 400 to 450 square feet per gallon for one Regal Select interior product, while Sherwin-Williams describes 350 to 400 square feet as a typical gallon range. Primer, masonry coating, oil paint, gloss paint, exterior paint, and other formulations can publish different rates.</p>
+
+    <h2>The formula</h2><div class="formula-card"><p class="formula">Practical project area = containers × container volume × label coverage ÷ coats ÷ (1 + contingency)</p></div>
+    <p>For aerosol paint, replace container volume times gallon coverage with the label coverage per spray can. Use the calculator above so quart, gallon, litre, and metric area conversions stay consistent.</p>
+
+    <h2>Why real coverage can be lower</h2><ul><li>Rough, porous, bare, or repaired surfaces absorb more coating.</li><li>Large colour changes and some deep colours need another coat.</li><li>Spray application loses material beyond the target through overspray.</li><li>Roller nap, brush loading, film thickness, and technique change spread rate.</li><li>Small containers can leave proportionally more material in trays, hoses, or cans.</li></ul>
+
+    <h2>Frequently asked questions</h2><div class="faq-list">{faq.map((item) => <details><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div>
+    <div class="disclaimer"><strong>Planning estimate:</strong> Read the product label and technical data sheet. Follow surface preparation, ventilation, personal protection, temperature, recoat, and disposal instructions.</div>
+
+    <h2>Sources and further reading</h2><ul><li><a href="https://media.benjaminmoore.com/WebServices/prod/assets/production/datasheets/TDS_0549/N549_TDS_US.pdf" rel="external">Benjamin Moore Regal Select technical data sheet</a></li><li><a href="https://www.sherwin-williams.com/en-us/color/color-tools/paint-calculator" rel="external">Sherwin-Williams paint calculator guidance</a></li></ul>
+
+    <h2>Related guides</h2><div class="guide-grid">{relatedGuides.map((guide) => <a class="guide-card" href={`/guides/${guide.slug}/`}><span class="meta"><span>Guide</span><span>{guide.readingTime}</span></span><h3>{guide.title}</h3><p>{guide.description}</p></a>)}</div>
+  </article><aside class="sidebar print-hidden"><div class="note-card"><h2>Planning a room?</h2><p>This quick tool answers how far a container can go. The full paint planner starts from room dimensions and produces a rounded shopping list.</p><p><a class="button" href="/calculators/paint/">Open room paint planner</a></p></div><div class="note-card"><h2>Use label data</h2><p>Brand, product line, finish, base, substrate, and application method can all affect the published spread rate.</p></div></aside></div></section>
+</BaseLayout>
+
+<style>
+.calculator-workspace { padding-bottom: 2rem; }
+.prose { min-width: 0; }
+.reference-table { max-width: 100%; overflow-x: auto; }
+.reference-table table { width: 100%; min-width: 520px; border-collapse: collapse; }
+.reference-table th, .reference-table td { padding: .75rem; border: 1px solid var(--line); text-align: left; }
+.reference-table th { background: #182820; color: white; }
+.reference-table tr:nth-child(even) td { background: #f5f0e6; }
+</style>

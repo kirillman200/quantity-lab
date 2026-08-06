@@ -13,7 +13,7 @@ const webApp = {
   description: SITE.description,
   browserRequirements: 'Requires JavaScript for calculators; guide content works without it.',
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-  featureList: ['Five project calculators', 'Metric and imperial units', 'Local project saves', 'Shareable URL state', 'Printable shopping lists'],
+  featureList: ['Paint coverage calculator', 'Five project planners', 'Metric and imperial units', 'Local project saves', 'Shareable URL state', 'Printable shopping lists'],
 };
 ---
 
@@ -51,6 +51,7 @@ const webApp = {
         <p>Each calculator handles multiple areas, transparent formulas, product package sizes, waste, and optional local prices.</p>
       </div>
       <div class="calculator-grid">
+        <a class="tool-card" href="/calculators/paint-coverage/" style="--accent:#d6532f"><span class="number">00</span><span class="arrow" aria-hidden="true">↗</span><div class="tool-icon"><span class="coverage-symbol" aria-hidden="true">ft²</span></div><h3>Paint coverage</h3><p>Gallons, quarts, litres, and spray cans</p></a>
         {calculators.map((calculator, index) => <CalculatorCard calculator={calculator} index={index} />)}
       </div>
     </div>
@@ -93,3 +94,5 @@ const webApp = {
     </div>
   </section>
 </BaseLayout>
+
+<style>.coverage-symbol { display: grid; place-items: center; min-height: 92px; font: 900 2.2rem/1 ui-monospace, monospace; }</style>

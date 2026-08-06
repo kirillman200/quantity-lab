@@ -28,6 +28,7 @@ const jsonLd = [
       {guide.sections.map((section, index) => <><section><h2>{section.heading}</h2>{section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}{section.steps && <ol>{section.steps.map((step) => <li>{step}</li>)}</ol>}</section>{index === 0 && <div class="ad-slot compact print-hidden" aria-label="Reserved ad space"><span>Reserved ad space</span></div>}</>)}
       <div class="ad-slot print-hidden" aria-label="Reserved ad space"><span>Reserved ad space</span></div>
       <section><h2>Practical takeaway</h2><p>{guide.takeaway}</p></section>
+      {guide.sources && guide.sources.length > 0 && <section><h2>Sources and further reading</h2><ul>{guide.sources.map((source) => <li><a href={source.url} rel="external">{source.label}</a></li>)}</ul></section>}
       <div class="disclaimer"><strong>Planning note:</strong> Confirm product instructions, site conditions, safety requirements, and applicable local rules before purchasing or starting work.</div>
       {related.length > 0 && <section><h2>Related {calculator.shortName.toLowerCase()} guides</h2><div class="guide-grid">{related.map((item) => <a class="guide-card" href={`/guides/${item.slug}/`}><span class="meta"><span>Guide</span><span>{item.readingTime}</span></span><h3>{item.title}</h3><p>{item.description}</p></a>)}</div></section>}
     </div>

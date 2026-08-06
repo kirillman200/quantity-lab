@@ -138,7 +138,7 @@ describe('built public contract', () => {
     expect(headers).toContain('Cache-Control: public, max-age=86400');
     const securityPolicy = readFileSync(routeFile('/security/'), 'utf8');
     expect(securityPolicy).toContain('href="https://github.com/kirillman200/quantity-lab/security/advisories/new"');
-    expect(securityPolicy).toContain('Last reviewed:</strong> July 23, 2026');
+    expect(securityPolicy).toContain('Last reviewed:</strong> August 6, 2026');
     expect(readFileSync(routeFile('/'), 'utf8')).toContain('href="mailto:contact@home.utilitas.app"');
     expect(readFileSync(routeFile('/contact/'), 'utf8')).toContain('href="mailto:contact@home.utilitas.app"');
     for (const path of ['package.json', 'package-lock.json', 'wrangler.jsonc', 'README.md', 'SECURITY.md', '.git', 'tests', 'src']) expect(existsSync(join(dist, path)), `${path} must not deploy`).toBe(false);
@@ -168,7 +168,7 @@ describe('built public contract', () => {
   });
 
   it('uses only the standard reserved ad-space label', () => {
-    const routes = ['/', '/calculators/', '/calculators/paint/', '/guides/', '/guides/paint-coverage/'];
+    const routes = ['/', '/calculators/', '/calculators/paint/', '/calculators/paint-coverage/', '/guides/', '/guides/paint-coverage/', '/guides/spray-paint-coverage/'];
     for (const route of routes) {
       const html = readFileSync(routeFile(route), 'utf8');
       const slots = [...html.matchAll(/<div class="[^"]*ad-slot[^"]*"[^>]*>([\s\S]*?)<\/div>/g)];
@@ -178,5 +178,21 @@ describe('built public contract', () => {
         expect((slot[1].match(/<span(?:\s[^>]*)?>/g) ?? []).length).toBe(1);
       }
     }
+  });
+
+  it('answers the Search Console paint-coverage gaps with visible calculator and guide content', () => {
+    const calculator = readFileSync(routeFile('/calculators/paint-coverage/'), 'utf8');
+    for (const answer of ['1 US quart', '1 US gallon', '5 US gallons', '1 litre', 'one can of spray paint']) expect(calculator).toContain(answer);
+    expect(calculator).toContain('PaintCoverageCalculator');
+
+    const paintGuide = readFileSync(routeFile('/guides/paint-coverage/'), 'utf8');
+    for (const topic of ['five gallons', 'one quart', 'one litre', 'Primer, exterior, oil, and gloss coverage']) expect(paintGuide).toContain(topic);
+
+    const sprayGuide = readFileSync(routeFile('/guides/spray-paint-coverage/'), 'utf8');
+    expect(sprayGuide).toContain('Practical project area');
+    expect(sprayGuide).toContain('overspray');
+
+    const readyMixGuide = readFileSync(routeFile('/guides/when-to-order-ready-mix/'), 'utf8');
+    for (const topic of ['minimums and short loads', 'Understand slump', 'volumetric mixer']) expect(readyMixGuide).toContain(topic);
   });
 });

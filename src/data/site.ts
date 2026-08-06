@@ -3,7 +3,7 @@ export const SITE = {
   origin: 'https://home.utilitas.app',
   contactEmail: 'contact@home.utilitas.app',
   description: 'Free, product-neutral calculators for home project materials, costs, and printable shopping lists.',
-  updated: '2026-07-23',
+  updated: '2026-08-06',
 } as const;
 
 export type CalculatorSlug = 'paint' | 'flooring-tile' | 'landscape-materials' | 'concrete' | 'fence';
@@ -44,7 +44,7 @@ export const calculators: CalculatorDefinition[] = [
       { question: 'Why does the calculator round up?', answer: 'Paint is bought in discrete containers. The exact volume is shown, but the shopping quantity rounds up to avoid a shortfall.' },
       { question: 'Does primer use the same coverage?', answer: 'Not always. Enter the primer coverage printed on its label; porous or patched surfaces may use more.' },
     ],
-    guides: ['measure-room-for-paint', 'paint-coverage', 'paint-coats', 'subtract-doors-windows', 'painting-shopping-checklist'],
+    guides: ['measure-room-for-paint', 'paint-coverage', 'spray-paint-coverage', 'paint-coats', 'subtract-doors-windows', 'painting-shopping-checklist'],
   },
   {
     slug: 'flooring-tile',
@@ -137,6 +137,7 @@ export interface GuideDefinition {
   intro: string;
   sections: Array<{ heading: string; paragraphs: string[]; steps?: string[] }>;
   takeaway: string;
+  sources?: Array<{ label: string; url: string }>;
 }
 
 export const guides: GuideDefinition[] = [
@@ -152,13 +153,34 @@ export const guides: GuideDefinition[] = [
   },
   {
     slug: 'paint-coverage', title: 'How much paint does a gallon cover?', category: 'paint', readingTime: '5 min',
-    description: 'Understand label coverage, surface porosity, colour changes, and why exact paint volume differs from cans to buy.',
-    intro: 'A common planning value is around 350–400 square feet per US gallon, but the product label is the source that matters. Coverage is affected by the coating, surface, roller nap, application method, and substrate.',
+    description: 'Compare gallon, five-gallon, quart, and litre paint coverage, then adjust label area for coats, porosity, and waste.',
+    intro: 'A common planning value is around 350 to 400 square feet per US gallon for one coat, but the product label is the source that matters. Coverage is affected by the coating, surface, roller nap, application method, film thickness, and substrate.',
     sections: [
-      { heading: 'Coverage is per coat', paragraphs: ['If a wall needs two coats, its area consumes coverage twice. A 400 sq ft wall with 400 sq ft/gal coverage needs about two gallons for two coats before waste—not one.'] },
+      { heading: 'Direct container-size answers', paragraphs: ['At a label rate of 400 square feet per US gallon, one quart covers 100 square feet, one gallon covers 400 square feet, five gallons covers 2,000 square feet, and one litre covers about 105.7 square feet or 9.8 square metres for one coat. These are conversions of an example label rate, not universal product promises.'] },
+      { heading: 'Coverage is per coat', paragraphs: ['If a wall needs two coats, its area consumes coverage twice. A 400 sq ft wall with 400 sq ft/gal coverage needs about two gallons for two coats before contingency, not one. The same rule reduces a five-gallon pail from 2,000 square feet for one coat to 1,000 square feet for two coats.'] },
       { heading: 'Porous surfaces use more', paragraphs: ['Fresh drywall, masonry, repaired areas, and rough texture can absorb more coating. Primer can reduce uneven absorption, but its own coverage also varies.'] },
+      { heading: 'Primer, exterior, oil, and gloss coverage', paragraphs: ['Do not assume that primer, exterior paint, oil paint, gloss paint, and interior wall paint share one spread rate. Even products from the same brand can differ by product line, sheen, colour base, and recommended film thickness. Use the exact can label or technical data sheet in the calculator.'] },
       { heading: 'Exact volume versus shopping quantity', paragraphs: ['The formula produces a continuous volume, while stores sell discrete cans. Keep both numbers: exact volume explains the math; rounded containers form the shopping list.'] },
-    ], takeaway: 'Enter the actual label coverage and keep a modest contingency. Product-specific data beats a universal rule of thumb.'
+    ], takeaway: 'Enter the actual label coverage and keep a modest contingency. Product-specific data beats a universal rule of thumb.',
+    sources: [
+      { label: 'Benjamin Moore Regal Select technical data sheet', url: 'https://media.benjaminmoore.com/WebServices/prod/assets/production/datasheets/TDS_0549/N549_TDS_US.pdf' },
+      { label: 'Sherwin-Williams paint calculator guidance', url: 'https://www.sherwin-williams.com/en-us/color/color-tools/paint-calculator' },
+    ]
+  },
+  {
+    slug: 'spray-paint-coverage', title: 'How much does a can of spray paint cover?', category: 'paint', readingTime: '6 min',
+    description: 'Estimate spray-paint cans from label coverage, coats, object geometry, surface texture, and overspray loss.',
+    intro: 'There is no single square-foot answer for every spray can. Aerosol size alone does not establish coverage: formulation, colour, nozzle, surface, object shape, film thickness, and spraying technique all affect how much painted area a can produces.',
+    sections: [
+      { heading: 'Start with the label area', paragraphs: ['Find the coverage area stated on the can or technical data sheet and treat it as a one-coat planning maximum under the listed conditions. Do not convert aerosol fluid ounces into wall-paint gallon coverage because the products and application losses are different.'] },
+      { heading: 'Divide by coats and contingency', paragraphs: ['Practical project area = number of cans × label area per can ÷ coats ÷ (1 + contingency). If one can lists 12 square feet, two coats with 20% contingency plans for 5 square feet of finished project area.'] },
+      { heading: 'Geometry creates overspray', paragraphs: ['A flat panel captures more of the spray pattern than chair spindles, wire shelving, railings, or small separate parts. Paint passing between or beyond the object is still consumed, so open shapes need a larger contingency.'] },
+      { heading: 'Technique changes the result', paragraphs: ['Use the distance, movement, temperature, ventilation, and recoat directions on the product. Multiple light coats are commonly specified for aerosol products. Heavy passes can sag without improving useful coverage.'] },
+      { heading: 'Count every coated face', paragraphs: ['Measure each face that will receive paint. For a rectangular object, include front, back, sides, top, and bottom as applicable. Curved and irregular objects can be approximated with simple rectangles and a conservative allowance.'] },
+    ], takeaway: 'Use the spray can label in the paint coverage calculator, count every coat, and increase contingency for open or complex shapes.',
+    sources: [
+      { label: 'Rust-Oleum Painter’s Touch 2X product guidance', url: 'https://www.rustoleum.com/product-catalog/consumer-brands/painters-touch-2x-ultra-cover' },
+    ]
   },
   {
     slug: 'paint-coats', title: 'Do I need one coat or two?', category: 'paint', readingTime: '5 min',
@@ -241,14 +263,22 @@ export const guides: GuideDefinition[] = [
     ], takeaway: 'Volume planning is arithmetic; structural adequacy is not. Use the calculator for purchasing and qualified local guidance for design.'
   },
   {
-    slug: 'when-to-order-ready-mix', title: 'When to order ready-mix concrete', category: 'concrete', readingTime: '6 min',
-    description: 'Compare bag mixing with ready-mix based on volume, placement time, access, and total effort.',
-    intro: 'The break-even point is not only material cost. A larger pour must be mixed, placed, consolidated, and finished before it loses workability.',
+    slug: 'when-to-order-ready-mix', title: 'How to order ready-mix concrete', category: 'concrete', readingTime: '8 min',
+    description: 'Plan a ready-mix order, ask about minimum and short-load charges, and confirm slump, volume, access, timing, and truck type.',
+    intro: 'Ordering ready-mix is more than naming a cubic-yard total. The supplier needs enough information to provide the specified concrete, schedule production, reach the placement, and discharge at a rate the crew can handle.',
     sections: [
       { heading: 'Count batches and handling', paragraphs: ['Divide total volume by mixer capacity and estimate the time for every batch. Include moving bags, water measurement, and moving wet concrete to the forms.'] },
-      { heading: 'Check delivery constraints', paragraphs: ['Ready-mix quotes may include minimum load, short-load, waiting, environmental, or pump charges. Confirm truck access, washout, crew size, and placement window.'] },
-      { heading: 'Choose consistency', paragraphs: ['Ready-mix can provide consistent batching across the pour. Bag mixing can suit small, staged, or remote work where truck access is impossible.'] },
-    ], takeaway: 'Ask suppliers for a delivered quote and logistics requirements, then compare it with the number of bag batches—not just bag price.'
+      { heading: 'Ask about minimums and short loads', paragraphs: ['There is no universal minimum concrete order. A producer may deliver less than a full truck but apply a minimum-load, short-load, delivery, waiting, environmental, or returned-concrete charge. Ask for the smallest delivered quantity and total delivered price before comparing it with bagged concrete.'] },
+      { heading: 'State quantity with contingency', paragraphs: ['Ready-mix is sold by volume in cubic yards or cubic metres. NRMCA recommends ordering 4% to 10% more than plan dimensions to cover contingencies. The calculator keeps this allowance visible instead of hiding it in the measurements.'] },
+      { heading: 'Order the required performance', paragraphs: ['Provide the project specification when one exists. Confirm the application, specified strength, exposure, air entrainment where required, aggregate size, placement method, and any other designer requirements with the producer. Do not invent a structural mix from a generic article.'] },
+      { heading: 'Understand slump', paragraphs: ['Slump measures fresh-concrete consistency, not strength by itself. The appropriate target depends on the mixture, forms, reinforcement, placement, pumping, and specification. Ask the producer or project professional for the suitable mix rather than adding uncontrolled water at the site.'] },
+      { heading: 'Ready-mix truck or volumetric mixer', paragraphs: ['A drum truck carries concrete batched for delivery. A volumetric mixer meters ingredients and mixes on site, which can suit small, staged, or uncertain quantities. Availability, certification, mixture control, minimums, and pricing vary locally, so compare suppliers against the same project requirements.'] },
+      { heading: 'Prepare access, crew, and schedule', paragraphs: ['Confirm truck dimensions and weight, street and driveway access, overhead clearance, discharge reach, pump or buggy needs, washout, crew size, delivery rate, weather plan, and placement duration. The crew and forms should be ready before the truck arrives.'] },
+    ], takeaway: 'Give the producer the project requirements, volume, placement method, site logistics, and schedule, then request a total delivered quote with every minimum and extra charge listed.',
+    sources: [
+      { label: 'NRMCA CIP 31: Ordering Ready Mixed Concrete', url: 'https://www.nrmca.org/wp-content/uploads/2021/01/31pr.pdf' },
+      { label: 'American Concrete Institute: How is workability measured and specified?', url: 'https://www.concrete.org/frequentlyaskedquestions/faqid/738.aspx' },
+    ]
   },
   {
     slug: 'measure-fence-runs', title: 'How to measure fence runs and gates', category: 'fence', readingTime: '6 min',
@@ -283,7 +313,8 @@ export const trustRoutes = [
 
 export const publicRoutes = [
   { path: '/', title: 'Home Project Material Calculators', description: SITE.description, kind: 'home' },
-  { path: '/calculators/', title: 'Home Project Calculators', description: 'Choose a substantial, product-neutral material planner for paint, floors, landscaping, concrete, or fencing.', kind: 'hub' },
+  { path: '/calculators/', title: 'Home Project Calculators', description: 'Choose a product-neutral calculator for paint coverage, room paint, floors, landscaping, concrete, or fencing.', kind: 'hub' },
+  { path: '/calculators/paint-coverage/', title: 'Paint Coverage Calculator for Gallons, Quarts, Litres, and Spray Cans', description: 'Calculate how many square feet or square metres a quart, gallon, five-gallon pail, litre, or spray can will cover after coats and contingency.', kind: 'calculator' },
   ...calculators.map((item) => ({ path: `/calculators/${item.slug}/`, title: item.name, description: item.description, kind: 'calculator' })),
   { path: '/guides/', title: 'Home Project Measurement Guides', description: 'Practical guides for measuring, selecting waste, comparing packages, and checking project assumptions.', kind: 'hub' },
   ...guides.map((item) => ({ path: `/guides/${item.slug}/`, title: item.title, description: item.description, kind: 'guide' })),

@@ -92,6 +92,7 @@ const graph = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
           <summary aria-label="Open navigation"><span></span><span></span><span></span></summary>
           <nav aria-label="Mobile navigation">
             <a href="/calculators/">All calculators</a>
+            <a href="/calculators/paint-coverage/">Paint coverage</a>
             {calculators.map((calculator) => <a href={`/calculators/${calculator.slug}/`}>{calculator.shortName}</a>)}
             <a href="/guides/">Guides</a>
             <a href="/about/">About</a>

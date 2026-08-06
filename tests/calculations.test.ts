@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { areaOfShape, calculateConcrete, calculateFence, calculateFlooring, calculateLandscape, calculatePaint, concreteSectionVolume, cubicFeetToDisplay, finiteNonNegative, round } from '../src/lib/calculations';
+import { areaOfShape, calculateConcrete, calculateFence, calculateFlooring, calculateLandscape, calculatePaint, calculatePaintCoverage, concreteSectionVolume, cubicFeetToDisplay, finiteNonNegative, round } from '../src/lib/calculations';
 
 describe('shared calculation helpers', () => {
   it('rejects negative and non-finite quantities', () => {
@@ -43,6 +43,29 @@ describe('paint planner', () => {
     expect(result.netArea).toBeCloseTo(47);
     expect(result.paint.exact).toBeCloseTo(9.4);
     expect(result.paint.packages).toBe(3);
+  });
+});
+
+describe('paint coverage calculator', () => {
+  it('converts wall-paint container sizes into effective project area', () => {
+    const result = calculatePaintCoverage({
+      mode: 'brush-roll', outputUnit: 'imperial', containers: 1, containerVolume: 5,
+      volumeUnit: 'us-gallon', labelCoveragePerGallon: 400, labelCoveragePerCan: 12,
+      coats: 2, contingency: 10,
+    });
+    expect(result.grossArea).toBe(2000);
+    expect(result.perContainerArea).toBe(2000);
+    expect(result.projectArea).toBeCloseTo(909.09, 2);
+  });
+
+  it('calculates spray-can coverage and metric output', () => {
+    const result = calculatePaintCoverage({
+      mode: 'spray', outputUnit: 'metric', containers: 3, containerVolume: 1,
+      volumeUnit: 'us-gallon', labelCoveragePerGallon: 400, labelCoveragePerCan: 12,
+      coats: 2, contingency: 0,
+    });
+    expect(result.grossArea).toBeCloseTo(3.3445, 3);
+    expect(result.projectArea).toBeCloseTo(1.6723, 3);
   });
 });
 

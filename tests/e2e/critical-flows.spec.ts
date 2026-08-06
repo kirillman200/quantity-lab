@@ -3,7 +3,19 @@ import { expect, test } from '@playwright/test';
 test('home page reaches every calculator family', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Measure it.');
-  for (const name of ['Paint', 'Flooring & tile', 'Mulch, soil & gravel', 'Concrete', 'Fence']) await expect(page.getByRole('link', { name: new RegExp(name) }).first()).toBeVisible();
+  for (const name of ['Paint coverage', 'Paint', 'Flooring & tile', 'Mulch, soil & gravel', 'Concrete', 'Fence']) await expect(page.getByRole('link', { name: new RegExp(name) }).first()).toBeVisible();
+});
+
+test('paint coverage calculator handles spray cans without page overflow', async ({ page }) => {
+  await page.goto('/calculators/paint-coverage/');
+  await page.getByRole('radio', { name: 'Spray can' }).check();
+  await page.getByLabel('Number of containers').fill('3');
+  await page.getByLabel('Label coverage per can').fill('12');
+  await page.getByLabel('Finish coats').fill('2');
+  await page.getByLabel('Contingency').fill('20');
+  await expect(page.locator('.primary-result').getByText('15', { exact: true })).toBeVisible();
+  await expect(page.locator('.primary-result')).toContainText('sq ft after 2 coat(s) and 20% contingency');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(await page.evaluate(() => document.documentElement.clientWidth));
 });
 
 test('paint project calculates, saves, restores, and shares', async ({ page, context }) => {

@@ -49,6 +49,27 @@ export interface QuantityResult {
   cost: number;
 }
 
+export type PaintCoverageMode = 'brush-roll' | 'spray';
+export type PaintVolumeUnit = 'us-gallon' | 'us-quart' | 'litre';
+
+export interface PaintCoverageInput {
+  mode: PaintCoverageMode;
+  outputUnit: UnitSystem;
+  containers: number;
+  containerVolume: number;
+  volumeUnit: PaintVolumeUnit;
+  labelCoveragePerGallon: number;
+  labelCoveragePerCan: number;
+  coats: number;
+  contingency: number;
+}
+
+export interface PaintCoverageResult {
+  grossArea: number;
+  projectArea: number;
+  perContainerArea: number;
+}
+
 const SQM_TO_SQFT = 10.7639104167;
 const CUBIC_METRE_TO_CUBIC_FEET = 35.3146667215;
 const LITRES_PER_US_GALLON = 3.785411784;
@@ -60,6 +81,38 @@ export function finiteNonNegative(value: number): number {
 export function round(value: number, places = 2): number {
   const factor = 10 ** places;
   return Math.round((value + Number.EPSILON) * factor) / factor;
+}
+
+export function calculatePaintCoverage(input: PaintCoverageInput): PaintCoverageResult {
+  const containers = finiteNonNegative(input.containers);
+  const coats = Math.max(1, finiteNonNegative(input.coats));
+  const contingencyFactor = 1 + finiteNonNegative(input.contingency) / 100;
+  let grossSquareFeet = 0;
+  let perContainerSquareFeet = 0;
+
+  if (input.mode === 'spray') {
+    perContainerSquareFeet = finiteNonNegative(input.labelCoveragePerCan);
+    grossSquareFeet = containers * perContainerSquareFeet;
+  } else {
+    const volume = finiteNonNegative(input.containerVolume);
+    const gallonsPerContainer = input.volumeUnit === 'us-quart'
+      ? volume / 4
+      : input.volumeUnit === 'litre'
+        ? volume / LITRES_PER_US_GALLON
+        : volume;
+    perContainerSquareFeet = gallonsPerContainer * finiteNonNegative(input.labelCoveragePerGallon);
+    grossSquareFeet = containers * perContainerSquareFeet;
+  }
+
+  const convertArea = (squareFeet: number) => input.outputUnit === 'metric'
+    ? squareFeet / SQM_TO_SQFT
+    : squareFeet;
+
+  return {
+    grossArea: convertArea(grossSquareFeet),
+    projectArea: convertArea(grossSquareFeet / coats / contingencyFactor),
+    perContainerArea: convertArea(perContainerSquareFeet),
+  };
 }
 
 export function lengthToFeet(value: number, unit: UnitSystem): number {
