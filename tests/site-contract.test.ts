@@ -160,6 +160,17 @@ describe('built public contract', () => {
     expect(headers).toContain("script-src 'self' 'unsafe-inline' 'unsafe-eval' https: http:");
   });
 
+  it('installs the separate consent-gated GA4 stream without calculator values', () => {
+    const homepage = readFileSync(routeFile('/'), 'utf8');
+    const analytics = readFileSync(join(dist, 'js', 'analytics.js'), 'utf8');
+    expect(homepage).toContain('name="google-analytics-id" content="G-KVE2YP45JW"');
+    expect(homepage).toContain('Calculator values, saved projects, and share-link queries are excluded');
+    expect(homepage).toContain('src="/js/analytics.js"');
+    expect(analytics).toContain('navigator.globalPrivacyControl === true');
+    expect(analytics).toContain('window.location.origin + window.location.pathname');
+    expect(analytics).not.toContain('window.location.search');
+  });
+
   it('publishes SVG and conventional favicon assets', () => {
     expect(readFileSync(join(dist, 'favicon.svg'), 'utf8')).toContain('<svg');
     const ico = readFileSync(join(dist, 'favicon.ico'));
