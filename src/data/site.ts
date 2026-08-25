@@ -124,7 +124,7 @@ export const calculators: CalculatorDefinition[] = [
       { question: 'Does the tool place corners?', answer: 'Treat each straight run as independent. Add a new run at every corner so its end posts are counted.' },
       { question: 'Does this check bylaws?', answer: 'No. Confirm height, setbacks, utility locates, permits, and pool-barrier rules locally.' },
     ],
-    guides: ['measure-fence-runs', 'fence-post-spacing'],
+    guides: ['measure-fence-runs', 'fence-post-spacing', 'how-many-fence-boards'],
   },
 ];
 
@@ -299,6 +299,49 @@ export const guides: GuideDefinition[] = [
       { heading: 'Panels impose module sizes', paragraphs: ['Prefabricated panels limit adjustment. Post centre spacing must match panel and bracket geometry, while custom rails can be cut to equalized spans.'] },
       { heading: 'Corners and gates change loads', paragraphs: ['Terminal, corner, and gate posts may need different sizes, depths, bracing, or concrete. Wind exposure and local frost conditions matter.'] },
     ], takeaway: 'Use the calculator count as a shopping baseline, then lay out actual post centres from the selected fence system and local requirements.'
+  },
+  {
+    slug: 'how-many-fence-boards', title: 'How many fence boards do I need?', category: 'fence', readingTime: '8 min',
+    description: 'Calculate fence-board or picket quantities from measured runs, actual board width, spacing, gates, layout style, and a stated waste allowance.',
+    intro: 'To estimate fence boards, divide the usable run length by the coverage of one board and its gap, then round up. That simple formula works only after you separate gates and decide whether boards are spaced, butted, overlapping, or installed on both faces.',
+    sections: [
+      {
+        heading: 'Measure usable fence runs',
+        paragraphs: [
+          'Sketch each straight run between corner, terminal, and gate posts. Record horizontal run length in one unit, then subtract openings that will be filled by gates or another material. Keep each run separate because end conditions and spacing adjustments occur independently.',
+          'Confirm property boundaries, utilities, height limits, setbacks, wind exposure, and structural requirements before buying. A quantity estimate does not select post depth, rail size, fasteners, or a code-compliant fence system.',
+        ],
+      },
+      {
+        heading: 'Use actual board width and the intended pattern',
+        paragraphs: [
+          'Measure the face width of the product rather than relying on a nominal lumber name. For a spaced picket pattern, one repeat covers the actual board width plus the intended gap. For tightly butted boards, the starting estimate uses board width alone, but wet or dry wood movement and manufacturer instructions still affect installation spacing.',
+          'Overlapping patterns need a different effective coverage. For board-on-board, subtract the overlap from the board width for the repeating exposure, then account for the starter and end conditions. Shadowbox layouts place boards on alternating faces, so calculate each face from the selected pattern instead of doubling a single-sided count without checking the overlap.',
+        ],
+      },
+      {
+        heading: 'Calculate and round each run',
+        paragraphs: [
+          'For ordinary spaced pickets, convert run length and board width to the same unit, then divide run length by board width plus gap. Round up to a whole board. For example, a 96 inch bay using boards with an actual 5.5 inch face and a 0.5 inch target gap starts with 96 divided by 6, or 16 repeating spaces.',
+          'A real layout also has a first and last edge. Dry-lay or mark the bay and distribute the leftover distance across the gaps so the final board is not a narrow rip. Lowe\'s published fence worksheet uses the same base method: fence length in inches divided by actual picket width plus spacing, with the result treated as an estimate.',
+        ],
+      },
+      {
+        heading: 'Handle gates, corners, and waste separately',
+        paragraphs: [
+          'Subtract the clear gate opening from ordinary board coverage, then add any boards used to build the gate leaf according to its design. Corners, returns, grade changes, and trimmed end boards can consume material that a continuous-run formula does not show.',
+          'Add a stated allowance for damaged pieces, knots, colour selection, cuts, and future repairs. Use the selected product quality and layout to choose the allowance rather than copying a universal percentage. Keep the exact calculated count and the purchase count visible so the reason for the extra material remains auditable.',
+        ],
+      },
+      {
+        heading: 'Turn the count into a complete shopping check',
+        paragraphs: [
+          'Use the fence calculator to model runs, posts, sections, panels, gates, and optional pricing. Then add rails, fasteners, post material, concrete, caps, preservative for cut ends, and any project-specific hardware from the chosen system instructions.',
+          'Before checkout, compare the calculator inputs with a physical sample or current product specification. Actual board width, panel module, moisture condition, local rules, and site layout can change the count even when the arithmetic is correct.',
+        ],
+      },
+    ],
+    takeaway: 'Keep run length, actual board width, gap or overlap, gate deductions, exact count, and purchase allowance on the same worksheet so every board can be traced to an assumption.'
   },
 ];
 
