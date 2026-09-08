@@ -1,0 +1,13 @@
+# Project Quantity Lab editorial context
+- Product-neutral home materials calculators. Audience: homeowners planning paint, flooring/tile, landscaping, concrete and fences. Metric and imperial, optional prices; quantities are estimates, not structural design or installation advice.
+- Canonical https://home.utilitas.app; /sitemap.xml; /guides/ and /guides/<slug>/. Links /calculators/paint/, /calculators/flooring-tile/, /calculators/landscape-materials/, /calculators/concrete/, /calculators/fence/.
+- Features: multiple areas, waste allowances, package rounding, local saves, explicitly shared URL state, print shopping lists. Confirm manufacturer yield/coverage and local requirements.
+- AGENTS.md links Astro docs and requires background mode for development servers. No need for a dev server when publishing registry content.
+- Repository-backed, no Hygraph found. src/data/site.ts owns GuideDefinition and guides, calculators and publicRoutes. Guide fields: slug/title/description/category/readingTime/intro/sections (heading/paragraphs/steps)/takeaway/sources (label/url).
+- src/pages/guides/[slug].astro produces TechArticle/Breadcrumb schema, related guides and calculator CTA; BaseLayout supplies canonical and social card /images/share-card.png. Index and sitemap consume registry.
+- Existing date schema and sitemap use SITE.updated globally. Add optional per-guide dates for new articles, preserve existing fallback dates, and render visible publication dates.
+- Astro/Vue/TypeScript, Cloudflare Worker + dist. npm.cmd run validate; npm.cmd run test:e2e; npm.cmd run deploy:dry. Deploy command also sends IndexNow; separate deployment and submission to permit required live checks first.
+- Git origin/main. IndexNow npm.cmd run indexnow (build and preview); npm.cmd run indexnow:send (build and guarded send). Inspect supported changed-URL arguments; guarded sitemap send is acceptable if that is all supported.
+
+## Editorial operations
+Initialized from repository evidence on 2026-09-08. Never use em dash punctuation. Read AGENTS.md when present. Use current web research and a targeted duplicate-topic check before publishing. Preserve unrelated changes; stage only exact article files and a newly created context file. Verify the article, title, description, canonical, headings, complete body, links, media, social metadata, structured data, index and sitemap on the custom domain. IndexNow is last: preview, verify live prerequisites without logging the ownership key, then explicitly send. HTTP 200 means submitted; HTTP 202 means key validation pending. Neither proves indexing.

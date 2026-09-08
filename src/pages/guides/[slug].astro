@@ -12,7 +12,7 @@ const calculator = calculatorBySlug[guide.category];
 const related = guides.filter((item) => item.category === guide.category && item.slug !== guide.slug).slice(0, 3);
 const path = `/guides/${guide.slug}/`;
 const jsonLd = [
-  { '@type': 'TechArticle', headline: guide.title, description: guide.description, url: absolute(path), datePublished: SITE.updated, dateModified: SITE.updated, author: { '@id': `${SITE.origin}/#organization` }, publisher: { '@id': `${SITE.origin}/#organization` }, image: absolute('/images/share-card.png'), mainEntityOfPage: absolute(path) },
+  { '@type': 'TechArticle', headline: guide.title, description: guide.description, url: absolute(path), datePublished: guide.datePublished || SITE.updated, dateModified: guide.dateModified || SITE.updated, author: { '@id': `${SITE.origin}/#organization` }, publisher: { '@id': `${SITE.origin}/#organization` }, image: absolute('/images/share-card.png'), mainEntityOfPage: absolute(path) },
   { '@type': 'BreadcrumbList', itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.origin },
     { '@type': 'ListItem', position: 2, name: 'Guides', item: absolute('/guides/') },
@@ -21,7 +21,7 @@ const jsonLd = [
 ];
 ---
 <BaseLayout title={guide.title} description={guide.description} path={path} type="article" jsonLd={jsonLd}>
-  <header class="page-hero"><div class="narrow"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span><a href="/guides/">Guides</a></span><span>{calculator.shortName}</span></nav><p class="eyebrow">{calculator.shortName} guide · {guide.readingTime}</p><h1>{guide.title}</h1><p class="lead">{guide.description}</p></div></header>
+  <header class="page-hero"><div class="narrow"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span><a href="/guides/">Guides</a></span><span>{calculator.shortName}</span></nav><p class="eyebrow">{calculator.shortName} guide · {guide.readingTime}</p><h1>{guide.title}</h1><p class="lead">{guide.description}</p>{guide.datePublished && <p>Published <time datetime={guide.datePublished}>{guide.datePublished}</time> · Updated <time datetime={guide.dateModified || guide.datePublished}>{guide.dateModified || guide.datePublished}</time></p>}</div></header>
   <article class="section"><div class="shell content-grid">
     <div class="prose">
       <p class="lead">{guide.intro}</p>

@@ -134,6 +134,8 @@ export interface GuideDefinition {
   description: string;
   category: CalculatorSlug;
   readingTime: string;
+  datePublished?: string;
+  dateModified?: string;
   intro: string;
   sections: Array<{ heading: string; paragraphs: string[]; steps?: string[] }>;
   takeaway: string;
@@ -141,6 +143,66 @@ export interface GuideDefinition {
 }
 
 export const guides: GuideDefinition[] = [
+  {
+  "slug": "tile-box-coverage-nominal-size",
+  "title": "Tile box coverage: why nominal size is not enough",
+  "description": "Use the exact tile carton coverage to turn a measured area into whole boxes, while keeping nominal size, actual dimensions and waste separate.",
+  "category": "flooring-tile",
+  "readingTime": "6 min",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "intro": "For a tile purchase estimate, use the coverage printed for the exact product and carton. Do not assume a tile sold as 12 by 24 inches gives exactly two square feet of coverage per piece. Nominal size is a product label; actual dimensions, installation spacing and the manufacturer's coverage basis can differ.",
+  "sections": [
+    {
+      "heading": "Separate three measurements before calculating",
+      "paragraphs": [
+        "Record the product's nominal size, the actual face dimensions and the stated coverage per carton as separate fields. The nominal size helps identify the format. Actual dimensions matter when checking layout and fit. Carton coverage is the purchasing input that converts a measured area into packages.",
+        "Zia Tile's ceramic specification illustrates the distinction by listing nominal dimensions, actual dimensions, pieces per box and square feet per box in separate columns. Its existence is useful evidence that these quantities should not be collapsed into one number. The specification describes that manufacturer's ceramic products; it is not a universal conversion table or evidence that a wall tile is suitable for a floor."
+      ]
+    },
+    {
+      "heading": "Read the exact product record",
+      "paragraphs": [
+        "Match the product code, finish, size and packaging on the seller's listing to the carton or current technical sheet. A per-piece price, a per-square-foot price and a per-box price are different purchasing units. Write down the coverage and its unit beside the price so that a cheap-looking number does not silently become the wrong box cost.",
+        "If the listed area and your own piece-area calculation disagree, ask the supplier which coverage figure to use and whether it includes installation spacing. Do not fix the discrepancy by inventing a grout allowance. Mosaic sheets, irregular shapes and multi-size patterns deserve a product-specific coverage explanation and a layout check."
+      ],
+      "steps": [
+        "Identify the exact product and intended floor or wall use.",
+        "Record the carton coverage in square feet or square metres.",
+        "Record pieces or sheets per carton as a separate count.",
+        "Confirm the price unit and whether only full cartons can be ordered."
+      ]
+    },
+    {
+      "heading": "Work through one whole-box example",
+      "paragraphs": [
+        "Suppose a measured area is 142 square feet. For this illustration only, the installer and buyer choose a 10% allowance for the layout, giving 142 × 1.10 = 156.2 square feet to purchase before package rounding. A carton marked 15.5 square feet gives 156.2 ÷ 15.5 = 10.08 cartons, which rounds up to 11 cartons.",
+        "Those 11 cartons provide 170.5 square feet, leaving 28.5 square feet above the measured area. That total includes both the chosen allowance and additional material caused by full-carton rounding. Do not add another 10% after rounding unless you are intentionally buying a separately documented reserve. The 10% here is an example, not a recommendation for every installation."
+      ]
+    },
+    {
+      "heading": "Enter coverage and units in the planner",
+      "paragraphs": [
+        "In the flooring and tile calculator, enter the measured areas, select the relevant measurement units, choose your allowance and use the exact box coverage from the product record. Keep a note of the product code with the saved plan. The quantity estimate is only as transferable as the packaging assumption attached to it.",
+        "If the room was measured in square metres but a supplier quotes square feet per box, convert one side consistently before comparing. As a useful check, one square metre is approximately 10.764 square feet. Never mix a number measured in metres with an area expressed in square feet just because both appear in the same product listing."
+      ]
+    },
+    {
+      "heading": "Keep layout and installation materials separate",
+      "paragraphs": [
+        "An area estimate cannot confirm that a particular pattern will fit without narrow edge cuts, that an offcut can be reused elsewhere, or that every delivered tile is suitable for the intended location. Confirm layout and product suitability with the installer before treating the calculated carton count as the final order.",
+        "Grout, mortar, underlayment, trims and movement-joint materials need their own product instructions and quantities. Tile carton coverage does not predict their consumption. Keep those items on separate shopping-list lines, then verify the carton labels and product codes when the order arrives. Sources and the purchasing method were reviewed September 8, 2026."
+      ]
+    }
+  ],
+  "takeaway": "Measure the surface, document the allowance, divide by the exact carton coverage and round once to the purchasable package. Keep the product label with the estimate so another person can reproduce the count.",
+  "sources": [
+    {
+      "label": "Zia Tile ceramic specification: nominal size, actual size and carton coverage",
+      "url": "https://support.ziatile.com/hc/en-us/article_attachments/15587349901844"
+    }
+  ]
+},
   {
     slug: 'measure-room-for-paint', title: 'How to measure a room for paint', category: 'paint', readingTime: '6 min',
     description: 'Measure wall perimeter, height, ceilings, doors, and windows for a paint estimate you can audit.',
