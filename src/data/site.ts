@@ -144,6 +144,72 @@ export interface GuideDefinition {
 
 export const guides: GuideDefinition[] = [
   {
+  "slug": "cubic-yards-to-tonnes-landscape-materials",
+  "title": "Cubic yards to tonnes: ordering landscape materials",
+  "description": "Convert a landscape volume into an estimated weight using the supplier’s bulk density, with clear units, an example and questions to ask before delivery.",
+  "category": "landscape-materials",
+  "readingTime": "6 min",
+  "datePublished": "2026-09-29",
+  "dateModified": "2026-09-29",
+  "intro": "There is no single conversion from cubic yards to tonnes for mulch, soil or gravel. A cubic yard measures volume; a tonne measures mass. To connect them, use the bulk density for the exact material and condition quoted by the supplier. Calculate the volume first, then make a separate, labelled weight estimate.",
+  "sections": [
+    {
+      "heading": "Keep volume and weight in separate columns",
+      "paragraphs": [
+        "A bed or path measurement gives a volume from area multiplied by depth. That is the starting point for the landscape calculator. A supplier may sell the material by cubic yard, cubic metre, bag or tonne, so the quote can use a different unit from the plan. Do not replace one label with another while leaving the number unchanged.",
+        "A tonne, also called a metric ton, is 1,000 kilograms. It is not the same unit as a US short ton of 2,000 pounds. NIST lists these as separate units in its conversion tables. Ask which unit a quote means when it says ton, particularly when comparing Canadian and US information."
+      ]
+    },
+    {
+      "heading": "Request the density that matches the order",
+      "paragraphs": [
+        "Ask the supplier for the approximate bulk density of the specific product in its supplied condition, including the units. A figure in tonnes per cubic metre cannot be applied directly to a volume still expressed in cubic yards. Also ask whether the figure describes loose material, compacted material, or another stated condition.",
+        "Do not substitute the density of solid stone for the bulk density of a pile of aggregate. The pile includes spaces between pieces. Moisture, the mix of particle sizes and handling conditions can change a practical weight estimate, so a generic internet conversion is not a substitute for a supplier-specific quotation. If the supplier cannot give a usable conversion, request a quote directly for the measured volume."
+      ]
+    },
+    {
+      "heading": "Work through an explicitly hypothetical example",
+      "paragraphs": [
+        "Suppose your measured plan, after its chosen volume allowance, is 2.5 cubic yards. One cubic yard is approximately 0.764555 cubic metres, using the NIST conversion factor. The volume is therefore 2.5 × 0.764555 = 1.9114 cubic metres. Keep a few decimal places until the purchase unit is chosen.",
+        "For this example only, suppose the supplier quotes a loose bulk density of 1.6 tonnes per cubic metre. The estimated mass is 1.9114 × 1.6 = 3.0582 tonnes, or approximately 3.06 tonnes. The 1.6 value is an invented teaching input, not a recommended density for your gravel, soil or mulch. Replace it with the supplier’s figure before ordering.",
+        "If the quote is instead per tonne, multiply the estimated tonnes by that price and then add delivery and any stated minimums. If the supplier bills by a measured load weight, confirm how the final charge is determined. A calculated estimate is not a weighbridge ticket."
+      ]
+    },
+    {
+      "heading": "Keep compaction allowances out of the unit conversion",
+      "paragraphs": [
+        "Converting cubic yards to cubic metres changes units, not the physical quantity. A compaction or settling allowance changes the quantity being ordered. Treat those as two different operations and record both so that the same allowance is not quietly applied twice.",
+        "For example, if your saved landscape plan already includes an allowance before it displays 2.5 cubic yards, do not automatically add another percentage when multiplying by density. Ask the supplier or installer whether the original allowance suits the material and intended use. This calculator estimates quantities; it does not specify a structural base or a compaction procedure."
+      ]
+    },
+    {
+      "heading": "Use a weight estimate to plan delivery questions",
+      "paragraphs": [
+        "A volume calculator cannot approve a vehicle load. If you are considering collection, confirm the permitted payload and all relevant vehicle, trailer and loading limits with the appropriate documentation and supplier. Account for passengers, tools and other cargo rather than treating the entire published capacity as available material weight.",
+        "For delivery, discuss access, the unloading location, minimum order, vehicle requirements and what happens if the site cannot accept the load. A cheaper tonne price may not produce a cheaper usable order once the delivery arrangement is included. Compare the same material, quantity basis and delivery scope."
+      ],
+      "steps": [
+        "Save the area, depth and allowance used for the volume.",
+        "Confirm the sales unit and the meaning of ton or tonne.",
+        "Get the exact product’s density and its loose or compacted basis.",
+        "Convert volume units before multiplying by density.",
+        "Confirm ordering increments, final billing and delivery access."
+      ]
+    }
+  ],
+  "takeaway": "Order from a documented volume and a supplier-confirmed conversion. Preserve the density assumption in the saved plan so another quote can be compared without guessing.",
+  "sources": [
+    {
+      "label": "NIST: volume and mass conversion factors",
+      "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8"
+    },
+    {
+      "label": "USDA NRCS: bulk density, pore space and moisture",
+      "url": "https://www.nrcs.usda.gov/sites/default/files/2022-10/Soil%20Bulk%20Density%20Moisture%20Aeration.pdf"
+    }
+  ]
+},
+  {
   "slug": "tile-box-coverage-nominal-size",
   "title": "Tile box coverage: why nominal size is not enough",
   "description": "Use the exact tile carton coverage to turn a measured area into whole boxes, while keeping nominal size, actual dimensions and waste separate.",
