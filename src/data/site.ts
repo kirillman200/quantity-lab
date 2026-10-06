@@ -144,6 +144,72 @@ export interface GuideDefinition {
 
 export const guides: GuideDefinition[] = [
   {
+  "slug": "paint-quantities-by-colour-and-finish",
+  "title": "Calculate paint separately for each colour and finish",
+  "description": "Group paint areas by the exact product, colour and finish before rounding cans. Use a worked example to avoid a misleading whole-house total.",
+  "category": "paint",
+  "readingTime": "5 min",
+  "datePublished": "2026-10-06",
+  "dateModified": "2026-10-06",
+  "intro": "Calculate and round paint purchases separately for each exact product, colour and finish. Two rooms can share an order only when they use the same coating specification. Adding all required litres first can hide a shortage of one colour behind leftover paint of another.",
+  "sections": [
+    {
+      "heading": "Make the shopping groups before measuring totals",
+      "paragraphs": [
+        "Create one group for every paint you will actually purchase. Record the product line, colour code, finish, intended surface and package sizes available. A ceiling coating, wall coating and trim coating may need separate groups even when you describe all three as white. Confirm the specification with the supplier rather than relying on a colour name alone.",
+        "Then assign each painted surface to exactly one group. Two bedrooms using the same specified wall paint can share a quantity calculation. An accent wall goes into its own group and must leave the main-wall total. This prevents counting the same wall twice while keeping the purchase list useful at the paint counter."
+      ]
+    },
+    {
+      "heading": "Calculate each group from its own assumptions",
+      "paragraphs": [
+        "For each group, multiply net area by the intended coat count and divide by the product’s stated coverage. Apply the chosen allowance separately and label it. Resene’s estimating worksheet uses the same area, spreading-rate and coat-count relationship; it also directs readers to product-specific coverage information. Its example rate is not a universal rate for a Canadian paint purchase.",
+        "Use Project Quantity Lab’s paint calculator for one compatible group at a time. Keep primer as its own material with its own coverage and coat assumptions. If the interface does not represent a particular accent surface directly, measure and record that surface separately rather than forcing a whole-room setting to stand for a different geometry."
+      ]
+    },
+    {
+      "heading": "A two-colour example shows why the total misleads",
+      "paragraphs": [
+        "Suppose, purely for illustration, that colour A needs 3.2 litres and colour B needs 3.2 litres after their chosen allowances. Assume the selected products are available only in four-litre cans. Each colour needs one can: two cans, eight litres purchased. You cannot buy one can containing 6.4 litres of two separate colours.",
+        "Now suppose three colours each need 1.1 litres and only four-litre cans are available. The combined calculated volume is 3.3 litres, but the purchase is three cans, or 12 litres. Rounding the pooled total would suggest one can and leave two colours missing. These are teaching quantities and invented package constraints, not a recommendation to buy a particular brand or size.",
+        "For comparison, if two rooms each need 1.1 litres of the exact same specified paint, combine their 2.2 litres before rounding that group. Under the same four-litre assumption, one can covers the group’s calculated requirement. Grouping too broadly creates shortages; rounding every room independently can create avoidable leftovers."
+      ]
+    },
+    {
+      "heading": "Compare available packages without promising an optimum",
+      "paragraphs": [
+        "Ask which sizes the retailer actually stocks for each product and tint. A smaller can may reduce leftover volume but have a higher unit price. Compare the total price, usable volume and any desired future touch-up reserve. The calculator’s rounded quantity is a planning result, not proof of the cheapest combination of all retail packages.",
+        "Do not count an opened leftover can as fully available without checking its identity, usable quantity and manufacturer storage guidance. Keep that decision separate from the new-paint arithmetic. A label that no longer identifies the product and tint makes a poor basis for reducing an order."
+      ]
+    },
+    {
+      "heading": "Hand over a list someone can verify",
+      "paragraphs": [
+        "For each group, save the area, coat count, coverage source, allowance, calculated litres, chosen packages and expected leftover. Include the product and colour identifiers on the shopping list. If the retailer substitutes a product, revisit its coverage and package sizes before approving the quantity.",
+        "Research checked October 6, 2026. Coverage, preparation and coat requirements must come from the actual coating instructions and site conditions. This method organises quantities; it does not specify a coating system or replace the manufacturer’s application guidance."
+      ],
+      "steps": [
+        "Group surfaces by exact paint specification.",
+        "Assign each surface once.",
+        "Calculate volume using that product’s coverage.",
+        "Round within each compatible group.",
+        "Check stock, package sizes and the final labelled list."
+      ]
+    }
+  ],
+  "takeaway": "Combine rooms only when their paint specification matches, then round each paint group into purchasable containers.",
+  "sources": [
+    {
+      "label": "Resene: estimating paint from area, spreading rate and coats",
+      "url": "https://www.resene.com.au/homeown/how_to_diy/paint_calculator.pdf"
+    },
+    {
+      "label": "Project Quantity Lab: paint coverage and product-specific assumptions",
+      "url": "https://home.utilitas.app/guides/paint-coverage/"
+    }
+  ]
+},
+  {
   "slug": "cubic-yards-to-tonnes-landscape-materials",
   "title": "Cubic yards to tonnes: ordering landscape materials",
   "description": "Convert a landscape volume into an estimated weight using the supplier’s bulk density, with clear units, an example and questions to ask before delivery.",
