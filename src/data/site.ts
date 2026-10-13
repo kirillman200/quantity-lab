@@ -129,6 +129,7 @@ export const calculators: CalculatorDefinition[] = [
 ];
 
 export interface GuideDefinition {
+  image?: { src: string; alt: string; width: number; height: number };
   slug: string;
   title: string;
   description: string;
@@ -143,6 +144,82 @@ export interface GuideDefinition {
 }
 
 export const guides: GuideDefinition[] = [
+  {
+  "slug": "concrete-volume-uneven-base",
+  "title": "Estimate concrete volume when the base is uneven",
+  "description": "Split a slab into measured depth zones, calculate each volume and keep the allowance separate. Avoid using one shallow measurement for the whole order.",
+  "category": "concrete",
+  "readingTime": "5 min",
+  "datePublished": "2026-10-13",
+  "dateModified": "2026-10-13",
+  "intro": "For a slab with varying depth, estimate the volume of each measured area separately and add those volumes before applying an allowance. One edge measurement can miss a deeper section. This is quantity arithmetic, not permission to accept an uneven base or change a structural design.",
+  "sections": [
+    {
+      "heading": "Resolve the base condition before treating it as an input",
+      "paragraphs": [
+        "First establish the required finished level, slab specification and acceptable base preparation with the person responsible for the work. A quantity calculator cannot decide whether low spots should be corrected, whether the base is properly compacted or whether a thinner area is acceptable. More concrete is not automatically the remedy for a preparation problem.",
+        "QUIKRETE’s mixing and placing training material explicitly notes that inconsistent slab thickness changes the volume required and stresses a consistent sub-base. Use the approved geometry after any necessary correction. Keep design, reinforcement, joints and installation requirements outside this purchasing calculation."
+      ]
+    },
+    {
+      "heading": "Build a depth map rather than choosing a convenient average",
+      "paragraphs": [
+        "Mark a simple plan with non-overlapping zones and record the area and representative depth for each. Measure from the intended upper surface to the prepared base using an appropriate consistent reference. Keep units visible. A depth written as 100 needs a unit before it belongs in any calculation.",
+        "The depth assigned to a zone must represent that zone. If a depression occupies a small corner, averaging its depth with a large shallow area as if both cover half the slab can overstate the total. Conversely, ignoring that depression understates it. Use smaller zones or better measurements where variation matters rather than disguising uncertainty with extra decimal places."
+      ]
+    },
+    {
+      "heading": "Use an area-weighted worked example",
+      "paragraphs": [
+        "Consider an invented rectangular slab divided into two zones. Zone A covers 6 square metres at a representative depth of 0.10 metres: 6 × 0.10 = 0.60 cubic metres. Zone B covers 2 square metres at 0.15 metres: 2 × 0.15 = 0.30 cubic metres. The combined geometric estimate is 0.90 cubic metres. These dimensions illustrate arithmetic only; they are not a slab specification.",
+        "The equivalent average depth is 0.90 ÷ 8 = 0.1125 metres. Simply averaging the two depths gives 0.125 metres, which would imply 1.00 cubic metre across the full eight square metres. That shortcut is wrong here because the two depths apply to different areas.",
+        "Using only the shallow 0.10-metre measurement would instead give 0.80 cubic metres. The difference between 0.80 and 0.90 is measured geometry in this example, not an allowance for spillage. Keep those concepts separate so the same extra volume is not counted twice."
+      ]
+    },
+    {
+      "heading": "Apply the chosen allowance once to the combined volume",
+      "paragraphs": [
+        "Add the zone volumes, then apply a clearly labelled allowance appropriate to the actual project and supplier discussion. If an illustrative allowance of 10 percent were chosen for the 0.90-cubic-metre example, the planning amount would be 0.99 cubic metres. Ten percent is an example input, not a universal recommendation.",
+        "For bagged concrete, divide by the exact selected product’s stated yield and round up to whole bags. Do not infer yield from bag weight alone. For ready-mix, confirm the ordering increment and delivery constraints with the supplier. Neither the geometric total nor a rounded bag count establishes that placement, access and timing are workable."
+      ]
+    },
+    {
+      "heading": "Carry the measurement record into the calculator and order",
+      "paragraphs": [
+        "Use Project Quantity Lab’s concrete calculator for the geometry it supports. If your depth map is more detailed than the interface, keep the zone calculation in your own measurement record and use separate calculations as needed. Do not pretend that a single-depth entry represents an automatic survey of an irregular base.",
+        "Before ordering, recheck dimensions after preparation changes. Retain the zone sketch, unit conversions, geometric total, chosen allowance, product yield and rounding rule. A supplier or installer should be able to see why the quantity differs from a simple length-times-width-times-nominal-depth estimate. Research checked October 13, 2026."
+      ],
+      "steps": [
+        "Confirm the approved base and finished geometry.",
+        "Measure non-overlapping area and depth zones.",
+        "Add area-times-depth volumes.",
+        "Apply one named allowance.",
+        "Confirm yield, ordering increments and placement requirements."
+      ]
+    }
+  ],
+  "takeaway": "Weight each depth by the area it represents, then separate geometric volume from allowance and purchase rounding.",
+  "sources": [
+    {
+      "label": "QUIKRETE: mixing and placing training, variable slab thickness example",
+      "url": "https://www.quikrete.com/dealers/training/presentations/3-mixing-placing-concrete-cement-mixes-training.pdf"
+    },
+    {
+      "label": "Project Quantity Lab: concrete volume and bag yield",
+      "url": "https://home.utilitas.app/guides/concrete-volume-and-bag-yield/"
+    },
+    {
+      "label": "Project Quantity Lab: ready-mix order planning",
+      "url": "https://home.utilitas.app/guides/when-to-order-ready-mix/"
+    }
+  ],
+  "image": {
+    "src": "/images/articles/concrete-volume-uneven-base.png",
+    "alt": "Conceptual slab cross-section showing different depths above an uneven base",
+    "width": 1730,
+    "height": 909
+  }
+},
   {
   "slug": "paint-quantities-by-colour-and-finish",
   "title": "Calculate paint separately for each colour and finish",

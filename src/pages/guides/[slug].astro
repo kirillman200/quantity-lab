@@ -12,7 +12,7 @@ const calculator = calculatorBySlug[guide.category];
 const related = guides.filter((item) => item.category === guide.category && item.slug !== guide.slug).slice(0, 3);
 const path = `/guides/${guide.slug}/`;
 const jsonLd = [
-  { '@type': 'TechArticle', headline: guide.title, description: guide.description, url: absolute(path), datePublished: guide.datePublished || SITE.updated, dateModified: guide.dateModified || SITE.updated, author: { '@id': `${SITE.origin}/#organization` }, publisher: { '@id': `${SITE.origin}/#organization` }, image: absolute('/images/share-card.png'), mainEntityOfPage: absolute(path) },
+  { '@type': 'TechArticle', headline: guide.title, description: guide.description, url: absolute(path), datePublished: guide.datePublished || SITE.updated, dateModified: guide.dateModified || SITE.updated, author: { '@id': `${SITE.origin}/#organization` }, publisher: { '@id': `${SITE.origin}/#organization` }, image: absolute(guide.image?.src || '/images/share-card.png'), mainEntityOfPage: absolute(path) },
   { '@type': 'BreadcrumbList', itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.origin },
     { '@type': 'ListItem', position: 2, name: 'Guides', item: absolute('/guides/') },
@@ -20,10 +20,11 @@ const jsonLd = [
   ] },
 ];
 ---
-<BaseLayout title={guide.title} description={guide.description} path={path} type="article" jsonLd={jsonLd}>
+<BaseLayout title={guide.title} description={guide.description} path={path} type="article" jsonLd={jsonLd} image={guide.image}>
   <header class="page-hero"><div class="narrow"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span><a href="/guides/">Guides</a></span><span>{calculator.shortName}</span></nav><p class="eyebrow">{calculator.shortName} guide · {guide.readingTime}</p><h1>{guide.title}</h1><p class="lead">{guide.description}</p>{guide.datePublished && <p>Published <time datetime={guide.datePublished}>{guide.datePublished}</time> · Updated <time datetime={guide.dateModified || guide.datePublished}>{guide.dateModified || guide.datePublished}</time></p>}</div></header>
   <article class="section"><div class="shell content-grid">
     <div class="prose">
+      {guide.image && <figure><img src={guide.image.src} alt={guide.image.alt} width={guide.image.width} height={guide.image.height} style="width:100%;height:auto" /><figcaption>Original AI-generated conceptual illustration, October 13, 2026. Not to scale or a structural specification.</figcaption></figure>}
       <p class="lead">{guide.intro}</p>
       {guide.sections.map((section, index) => <><section><h2>{section.heading}</h2>{section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}{section.steps && <ol>{section.steps.map((step) => <li>{step}</li>)}</ol>}</section>{index === 0 && <div class="ad-slot compact print-hidden" aria-label="Reserved ad space"><span>Reserved ad space</span></div>}</>)}
       <div class="ad-slot print-hidden" aria-label="Reserved ad space"><span>Reserved ad space</span></div>

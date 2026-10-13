@@ -3,6 +3,7 @@ import '../styles/global.css';
 import { SITE, absolute, calculators } from '../data/site';
 
 interface Props {
+  image?: { src: string; alt: string; width: number; height: number };
   title: string;
   description: string;
   path: string;
@@ -16,6 +17,7 @@ const {
   title,
   description,
   path,
+  image,
   imageAlt = 'Project Quantity Lab calculators for home project materials and costs',
   jsonLd,
   type = 'website',
@@ -23,7 +25,7 @@ const {
 } = Astro.props;
 const pageTitle = title.includes(SITE.name) ? title : `${title} | ${SITE.name}`;
 const canonical = absolute(path);
-const socialImage = absolute('/images/share-card.png');
+const socialImage = absolute(image?.src || '/images/share-card.png');
 const navPath = Astro.url.pathname;
 const organization = {
   '@type': 'Organization',
@@ -60,13 +62,14 @@ const graph = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={socialImage} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={imageAlt} />
+    <meta property="og:image:width" content={String(image?.width || 1200)} />
+    <meta property="og:image:height" content={String(image?.height || 630)} />
+    <meta property="og:image:alt" content={image?.alt || imageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:image:alt" content={image?.alt || imageAlt} />
     <script is:inline async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7469113252837951" crossorigin="anonymous"></script>
     <title>{pageTitle}</title>
     <script is:inline type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@graph': [organization, ...graph] })} />
