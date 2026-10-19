@@ -1,3 +1,5 @@
 * text=auto eol=lf
 *.png binary
 *.ico binary
+# Keep Wrangler's generated formatting intact for its types --check command.
+worker-configuration.d.ts whitespace=-blank-at-eol
