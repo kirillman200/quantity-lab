@@ -32,7 +32,7 @@
   "dependencies": {
     "@astrojs/vue": "^7.0.1",
     "astro": "^7.3.2",
-    "vue": "^3.5.40"
+    "vue": "^3.5.44"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
@@ -41,6 +41,6 @@
     "@vitest/coverage-v8": "^4.1.10",
     "typescript": "^6.0.3",
     "vitest": "^4.1.11",
-    "wrangler": "^4.147.0"
+    "wrangler": "^4.151.1"
   }
 }
