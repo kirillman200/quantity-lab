@@ -146,6 +146,14 @@ describe('fence planner', () => {
     expect(result.concreteBags).toBe(15);
   });
 
+  it('uses centimetre picket pitch consistently with metric run length and cost', () => {
+    // 10 m less a 1 m gate leaves 900 cm at 12 cm per picket.
+    const result = calculateFence({ unit: 'metric', runs: [{ id: '1', name: 'Run', length: 10, gates: 1, gateWidth: 1 }], spacing: 2, railsPerSection: 2, picketWidth: 10, picketGap: 2, postPrice: 0, panelPrice: 0, railPrice: 0, picketPrice: 3, concreteBagsPerPost: 0, concreteBagPrice: 0 });
+    expect(result.netLength).toBeCloseTo(9);
+    expect(result.pickets).toBe(75);
+    expect(result.cost).toBe(225);
+  });
+
   it('supports metric layout and safely handles zero spacing and picket pitch', () => {
     const result = calculateFence({ unit: 'metric', runs: [{ id: '1', name: 'Run', length: 10, gates: 0, gateWidth: 1 }], spacing: 0, railsPerSection: 2, picketWidth: 0, picketGap: 0, postPrice: 0, panelPrice: 0, railPrice: 0, picketPrice: 0, concreteBagsPerPost: 0, concreteBagPrice: 0 });
     expect(result.netLength).toBeCloseTo(10);

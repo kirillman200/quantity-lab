@@ -406,7 +406,7 @@ export function calculateFence(input: FenceInput): FenceResult {
   }
   const netFt = Math.max(0, grossFt - gateFt);
   const pitchFt = input.unit === 'metric'
-    ? (finiteNonNegative(input.picketWidth) + finiteNonNegative(input.picketGap)) / 100
+    ? (finiteNonNegative(input.picketWidth) + finiteNonNegative(input.picketGap)) / 30.48
     : (finiteNonNegative(input.picketWidth) + finiteNonNegative(input.picketGap)) / 12;
   const pickets = pitchFt ? Math.ceil(netFt / pitchFt) : 0;
   const rails = sections * Math.floor(finiteNonNegative(input.railsPerSection));
