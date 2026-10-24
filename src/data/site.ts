@@ -151,8 +151,8 @@ export const guides: GuideDefinition[] = [
   "description": "Measure the mulch that remains, calculate only the missing layer, and turn separate bed areas into a clear volume estimate with visible bag rounding.",
   "category": "landscape-materials",
   "readingTime": "6 min",
-  "datePublished": "2026-10-22",
-  "dateModified": "2026-10-22",
+  "datePublished": "2026-10-24",
+  "dateModified": "2026-10-24",
   "image": {
     "src": "/images/articles/mulch-top-up-missing-layer-estimate.png",
     "alt": "Garden-bed cutaway showing a thicker light mulch top-up over a thin dark remaining layer, a smaller top-up over a deeper layer, and a shrub with bare soil around its stems.",
