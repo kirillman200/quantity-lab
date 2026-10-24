@@ -109,6 +109,45 @@ describe('landscape planner', () => {
   });
 });
 
+describe('published mulch top-up worksheet', () => {
+  const rectangle = (length: number, width: number) => ({ id: `${length}x${width}`, name: 'Net bed area', shape: 'rectangle' as const, length, width, diameter: 0 });
+  const common = { unit: 'imperial' as const, areas: [rectangle(12, 5), rectangle(8, 5)], depth: 1, depthUnit: 'inch' as const, waste: 10, bagVolume: 2, bagVolumeUnit: 'cubic-feet' as const, bagPrice: 0, bulkPrice: 0 };
+
+  it('matches the common-depth example and applies the allowance once', () => {
+    const result = calculateLandscape(common);
+    expect(result.area).toBe(100);
+    expect(result.cubicFeet).toBeCloseTo(55 / 6, 10);
+    expect(result.cubicYards).toBeCloseTo(55 / 162, 10);
+    expect(result.bags).toBe(5);
+  });
+
+  it('converts the article 20 mm shortfall to the UI centimetre input', () => {
+    const result = calculateLandscape({ ...common, unit: 'metric', areas: [rectangle(4, 2), rectangle(3, 2)], depth: 2, depthUnit: 'cm', bagVolume: 50, bagVolumeUnit: 'litres' });
+    expect(result.area).toBeCloseTo(14, 8);
+    expect(result.cubicMetres).toBeCloseTo(.308, 8);
+    expect(result.bags).toBe(7);
+  });
+
+  it('combines different-depth run volumes before rounding one shared purchase', () => {
+    const a = calculateLandscape({ ...common, areas: [rectangle(12, 5)] });
+    const b = calculateLandscape({ ...common, areas: [rectangle(8, 5)], depth: .5 });
+    expect(a.cubicFeet + b.cubicFeet).toBeCloseTo(22 / 3, 10);
+    expect(Math.ceil((a.cubicFeet + b.cubicFeet) / common.bagVolume)).toBe(4);
+    // A separate case demonstrates why adding already rounded counts can overbuy.
+    const small = calculateLandscape({ ...common, areas: [rectangle(1, 1)] });
+    expect(small.bags * 2).toBe(2);
+    expect(Math.ceil(small.cubicFeet * 2 / common.bagVolume)).toBe(1);
+  });
+
+  it('keeps equal-target and over-target shortfalls at zero', () => {
+    for (const remaining of [2, 3]) {
+      const result = calculateLandscape({ ...common, depth: Math.max(0, 2 - remaining) });
+      expect(result.cubicFeet).toBe(0);
+      expect(result.bags).toBe(0);
+    }
+  });
+});
+
 describe('concrete planner', () => {
   it('calculates rectangular, cylindrical, and step volumes', () => {
     const slab = { id: '1', name: 'Slab', shape: 'slab' as const, length: 10, width: 8, depth: 1 / 3, diameter: 0, count: 1, rise: 0, run: 0 };

@@ -49,6 +49,17 @@ describe('built public contract', () => {
     }
   });
 
+  it('renders the mulch article release dates consistently', () => {
+    const html = readFileSync(routeFile('/guides/mulch-top-up-missing-layer-estimate/'), 'utf8');
+    const schemas = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+      .flatMap((match) => { const schema = JSON.parse(match[1]); return schema['@graph'] ?? [schema]; });
+    const article = schemas.find((schema) => schema['@type'] === 'TechArticle');
+    expect(article).toMatchObject({ datePublished: '2026-10-24', dateModified: '2026-10-24' });
+    expect(html).toContain('datetime="2026-10-24"');
+    expect(html).not.toContain('2026-10-22');
+    expect(html).toContain('Original AI-generated conceptual illustration, October 20, 2026.');
+  });
+
   it('keeps sitemap, robots, and llms inventory synchronized', () => {
     const sitemap = readFileSync(join(dist, 'sitemap.xml'), 'utf8');
     const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
