@@ -41,6 +41,25 @@ test('concrete calculator compares bag sizes', async ({ page }) => {
   await expect(page.getByText('Lowest entered bag cost')).toBeVisible();
 });
 
+test('concrete cost stays unavailable until a package has a price and usable yield', async ({ page }) => {
+  await page.goto('/calculators/concrete/');
+  const prices = page.getByLabel('Package price', { exact: true });
+  for (const price of await prices.all()) await price.fill('0');
+  await page.getByRole('button', { name: 'Calculate project' }).click();
+  const bestCost = page.locator('.result-metrics > div').filter({ hasText: 'Best entered bag cost' });
+  await expect(bestCost).toContainText('Cost unavailable');
+  await expect(page.locator('.comparison-table')).not.toContainText('Lowest entered bag cost');
+  await expect(page.locator('.comparison-table')).toContainText('66 bags');
+
+  await prices.nth(1).fill('7.60');
+  await expect(bestCost).toContainText('$372.40');
+  await expect(page.locator('.comparison-table .best')).toContainText('80 lb / 36 kg bag');
+
+  await page.getByLabel('Package yield in cubic feet').nth(1).fill('0');
+  await expect(bestCost).toContainText('Cost unavailable');
+  await expect(page.locator('.comparison-table')).not.toContainText('Lowest entered bag cost');
+});
+
 test('measurement visual responds to calculator inputs', async ({ page }) => {
   await page.goto('/calculators/paint/');
   await expect(page.getByRole('heading', { name: 'Live room surface preview' })).toBeVisible();
