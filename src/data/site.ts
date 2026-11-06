@@ -146,6 +146,156 @@ export interface GuideDefinition {
 
 export const guides: GuideDefinition[] = [
   {
+  "slug": "grout-quantity-product-coverage",
+  "title": "How much grout do I need? Read the product coverage chart first",
+  "description": "Estimate grout packages from installed area and product-specific coverage. Keep tile waste separate, check allowances and round compatible quantities once.",
+  "category": "flooring-tile",
+  "readingTime": "7 min",
+  "datePublished": "2026-11-06",
+  "dateModified": "2026-11-06",
+  "intro": "To estimate how much grout you need, divide the area that will actually be grouted by the manufacturer's coverage for your exact grout product, package and tile/joint combination. Account for any documented allowance once, combine compatible unrounded package demands, then round up to whole packages. The missing number is usually not the room area. It is the matching coverage value. A bag, pail or kit does not have one universal yield for every tile layout. This worksheet helps you turn a product coverage chart into a separate grout line on your shopping list, without treating extra tile cartons as extra installed floor area.",
+  "sections": [
+    {
+      "heading": "Start with installed area, not the tile order",
+      "paragraphs": [
+        "Record the area of each surface that will receive grout. Keep areas with different tile formats or joint geometry on separate worksheet lines, even when they use the same grout. Use the coverage chart's surface-area basis; do not substitute the exposed joint area unless the manufacturer specifically asks for it.",
+        "If the floor is irregular, use How to measure an irregular floor to establish the area first. Include only the surfaces within this grout estimate, and do not count overlapping measurements twice.",
+        "The flooring and tile calculator can help measure area and estimate tile quantities. It does not calculate grout. Take the measured project area as your starting point, not its tile purchase area after cutting waste or its rounded box coverage.",
+        "Extra tiles for cuts, breakage or future repairs are not automatically extra surfaces to grout. Keep that separate purchase decision in Choosing a flooring waste allowance. Tile cartons also have their own coverage basis, explained in Tile box coverage: why nominal size is not enough."
+      ],
+      "links": [
+        {
+          "label": "How to measure an irregular floor",
+          "url": "/guides/measure-irregular-floor/"
+        },
+        {
+          "label": "flooring and tile calculator",
+          "url": "/calculators/flooring-tile/"
+        },
+        {
+          "label": "Choosing a flooring waste allowance",
+          "url": "/guides/flooring-waste-allowance/"
+        },
+        {
+          "label": "Tile box coverage: why nominal size is not enough",
+          "url": "/guides/tile-box-coverage-nominal-size/"
+        }
+      ]
+    },
+    {
+      "heading": "Match the product, package and chart inputs",
+      "paragraphs": [
+        "Before doing arithmetic, write down the exact grout product and colour, plus the package size or kit identity. Coverage for a quart pail is not coverage for a gallon pail, and one product's bag yield is not a substitute for another's.",
+        "CUSTOM Building Products' Fusion Pro coverage chart is one example of why matching matters: it separates gallon and quart pails and lists tile width, length, thickness and joint width. Its coverage figures are estimates, not guaranteed jobsite yields. This is an illustration of chart structure, not a product recommendation or a claim about Canadian availability.",
+        "Follow the selected manufacturer's stated input conventions. LATICRETE's Project Estimator guidance explicitly describes a nominal-tile-size basis and notes that actual tile dimensions, installed joints and jobsite conditions affect the estimate. Do not replace a requested nominal dimension with an actual dimension just because another tool uses a different convention. Resolve an unclear input with the manufacturer before relying on the result.",
+        "Use the joint width and thickness or depth basis already established for the actual installation and required by that chart. This worksheet does not select joint dimensions, grout type or suitability. Confirm those decisions with the product instructions and responsible installer.",
+        "If the chart does not cover your shape or geometry, do not invent an exact yield from the nearest-looking row. LATICRETE's older Grout Guide, TDS 400, discusses coverage variation with joint widths and cushion- or wave-edge tiles. Ask the manufacturer for an applicable estimating basis for a nonstandard format. That guide is marked February 7, 2020; it is supporting context, not a new 2026 standard."
+      ],
+      "links": [
+        {
+          "label": "CUSTOM Building Products: Fusion Pro product information and Coverage Chart (checked November 6, 2026)",
+          "url": "https://www.custombuildingproducts.com/products/fusion-pro-single-component-grout"
+        },
+        {
+          "label": "LATICRETE: Project Estimator, Grout Coverage Guidelines (public guidance checked November 6, 2026)",
+          "url": "https://www.laticrete.com/solutions-for-you/contractors-and-installers/project-estimator?sc_lang=en"
+        },
+        {
+          "label": "LATICRETE: Grout Guide, TDS 400 (February 7, 2020; retrieved November 6, 2026)",
+          "url": "https://cdn-global.laticrete.com/-/media/project/laticrete-international/shared/files/support-and-downloads/technical-datasheets/tds400.pdf?hash=9870374F1A316E335271832AE399F5AB&rev=8b6c654a79a049ef91f13250797fb7b0"
+        }
+      ]
+    },
+    {
+      "heading": "Fill in one worksheet line per coverage group",
+      "paragraphs": [
+        "Copy this checklist for every group with a different coverage basis:"
+      ],
+      "steps": [
+        "Surface/group name and measured installed area, in square feet (sq ft) or square metres (m²).",
+        "Exact grout product, colour, package size and package identifier, if available.",
+        "Tile width and length, in inches (in) or millimetres (mm), following the chart's actual or nominal convention.",
+        "Tile thickness or joint-depth basis and installed joint width, in the units the chart requests. Record inputs; do not choose installation dimensions from this worksheet.",
+        "Source chart or guidance URL, date checked and the matching row or estimator input record.",
+        "Coverage per selected package, in sq ft/package or m²/package, on the same area basis as the measured surface.",
+        "Allowance status: already included, separately required, or unresolved. Record the source and reason for any extra allowance.",
+        "Unrounded package demand, compatibility group and final whole-package purchase quantity."
+      ]
+    },
+    {
+      "heading": "Keep units consistent",
+      "paragraphs": [
+        "Keep units consistent within each calculation. Square feet divided by square feet per package gives packages; square metres divided by square metres per package also gives packages. Do not divide a square-foot area by a square-metre coverage value. A package's weight or liquid volume identifies it, but it is not by itself a surface coverage value."
+      ]
+    },
+    {
+      "heading": "Apply allowances once, then round",
+      "paragraphs": [
+        "For coverage stated per package, the starting calculation is:",
+        "Unrounded package demand = installed area ÷ matching coverage per package.",
+        "If the selected manufacturer's guidance requires a separate allowance that is not already included, apply it before final rounding:",
+        "Adjusted package demand = unrounded demand × (1 + allowance as a decimal).",
+        "Check what the chart, estimator output or supplied quote already includes. LATICRETE's estimator guidance includes its own waste advice; that does not create a universal allowance for every grout. If the allowance basis is unclear, clarify it rather than adding another percentage automatically.",
+        "Round up only after adding demands that can genuinely share the same product, colour and package basis. Different tile formats can have different coverage values while drawing from the same package supply. Different colours or products remain separate. Different package sizes cannot be added as if their package counts were interchangeable."
+      ],
+      "links": [
+        {
+          "label": "LATICRETE: Project Estimator, Grout Coverage Guidelines (public guidance checked November 6, 2026)",
+          "url": "https://www.laticrete.com/solutions-for-you/contractors-and-installers/project-estimator?sc_lang=en"
+        }
+      ]
+    },
+    {
+      "heading": "Worked example: two formats, one compatible package supply",
+      "paragraphs": [
+        "All yields and the allowance in this example are hypothetical teaching inputs, not manufacturer coverage figures or a recommended waste rate. Assume both groups use the identical grout product, colour and package size. Assume their separately checked coverage bases do not already include the illustrative 5% allowance.",
+        "Group A covers 120 sq ft. Its hypothetical matching coverage is 80 sq ft per package. Base demand is 120 ÷ 80 = 1.5 packages. With the illustrative allowance, 1.5 × 1.05 = 1.575 packages.",
+        "Group B covers 40 sq ft with a different tile format. Its hypothetical matching coverage is 50 sq ft per identical package. Base demand is 40 ÷ 50 = 0.8 packages. With the same illustrative allowance, 0.8 × 1.05 = 0.84 packages.",
+        "Because the supply is compatible, add the unrounded adjusted demands: 1.575 + 0.84 = 2.415 packages. Round that total up to 3 packages. Do not round each intermediate number just to display a tidy worksheet.",
+        "If Group B instead needs a different colour, keep separate shopping lines: Group A rounds up to 2 packages and Group B rounds up to 1 package of its own colour. The numerical total happens to remain 3 in this example, but those packages are no longer interchangeable.",
+        "Independent metric example, not a conversion of the imperial example: a 14 m² surface with hypothetical coverage of 6 m² per package needs 14 ÷ 6 packages. If no additional allowance is required after checking the chosen basis, round the unrounded result up to 3 packages. Do not treat the unused package capacity as proof that real-world coverage is guaranteed.",
+        "These examples compare neither retail prices nor mixed package-size combinations. They do not establish the cheapest order or whether a particular package is stocked."
+      ]
+    },
+    {
+      "heading": "Check the shopping line before buying",
+      "paragraphs": [
+        "Keep a separate line for every incompatible product, colour or package basis. For each line, confirm:"
+      ],
+      "steps": [
+        "The measured installed area matches the surfaces being grouted, not the tile carton purchase area.",
+        "The exact product and package match the recorded coverage source and required geometry.",
+        "The manufacturer's nominal or actual dimension convention has been preserved.",
+        "Any allowance has an explicit basis and has not been counted twice.",
+        "Only compatible unrounded demands were combined before rounding up.",
+        "The supplier can provide the specified product, colour and package; any substitution gets a new coverage check.",
+        "Product suitability and installation requirements have been confirmed separately with the responsible installer and manufacturer instructions."
+      ]
+    },
+    {
+      "heading": "Save the worksheet",
+      "paragraphs": [
+        "Save the worksheet and the source reference with your shopping list. If the tile format, joint geometry, grout product or package changes, revisit the matching coverage value rather than carrying forward an old package count."
+      ]
+    }
+  ],
+  "takeaway": "Grout quantity starts with installed surface area and the selected product's matching package coverage, not a universal bags-per-room rule. Keep the chart's input conventions, document allowances once, and round only compatible combined demands into whole packages.",
+  "sources": [
+    {
+      "label": "CUSTOM Building Products: Fusion Pro product information and Coverage Chart (checked November 6, 2026)",
+      "url": "https://www.custombuildingproducts.com/products/fusion-pro-single-component-grout"
+    },
+    {
+      "label": "LATICRETE: Project Estimator, Grout Coverage Guidelines (public guidance checked November 6, 2026)",
+      "url": "https://www.laticrete.com/solutions-for-you/contractors-and-installers/project-estimator?sc_lang=en"
+    },
+    {
+      "label": "LATICRETE: Grout Guide, TDS 400 (February 7, 2020; retrieved November 6, 2026)",
+      "url": "https://cdn-global.laticrete.com/-/media/project/laticrete-international/shared/files/support-and-downloads/technical-datasheets/tds400.pdf?hash=9870374F1A316E335271832AE399F5AB&rev=8b6c654a79a049ef91f13250797fb7b0"
+    }
+  ]
+},
+  {
   "slug": "mulch-top-up-missing-layer-estimate",
   "title": "Topping up mulch: estimate the missing layer, not the whole depth",
   "description": "Measure the mulch that remains, calculate only the missing layer, and turn separate bed areas into a clear volume estimate with visible bag rounding.",
