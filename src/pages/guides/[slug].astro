@@ -24,7 +24,7 @@ const jsonLd = [
 <BaseLayout {...guide.seo} title={guide.title} description={guide.description} path={path} type="article" jsonLd={jsonLd} image={guide.image}>
   <header class="page-hero"><div class="narrow"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span><a href="/guides/">Guides</a></span><span>{calculator.shortName}</span></nav><p class="eyebrow">{calculator.shortName} guide · {guide.readingTime}</p><h1>{guide.title}</h1><p class="lead">{guide.description}</p>{guide.datePublished && <p>Published <time datetime={guide.datePublished}>{guide.datePublished}</time> · Updated <time datetime={guide.dateModified || guide.datePublished}>{guide.dateModified || guide.datePublished}</time></p>}</div></header>
   <article class="section"><div class="shell content-grid">
-    <div class="prose">
+    <div class="prose" style={guide.slug === 'paint-vaulted-ceiling-area' ? 'min-width: 0' : undefined}>
       {guide.image && <figure><img src={guide.image.src} alt={guide.image.alt} width={guide.image.width} height={guide.image.height} style="width:100%;height:auto" /><figcaption>{guide.imageCaption || 'Original AI-generated conceptual illustration, October 13, 2026. Not to scale or a structural specification.'}</figcaption></figure>}
       {guide.slug === 'paint-vaulted-ceiling-area' ? <VaultedCeilingArticle /> : <>
       <p class="lead">{guide.intro}</p>
