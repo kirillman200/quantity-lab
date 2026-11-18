@@ -70,3 +70,13 @@ test('mobile navigation works from a guide route', async ({ page }, testInfo) =>
   await page.getByRole('navigation', { name: 'Mobile navigation' }).getByRole('link', { name: 'Concrete' }).click();
   await expect(page).toHaveURL('/calculators/concrete/');
 });
+
+test('vaulted ceiling worksheets stay within the page and link to coverage', async ({ page }) => {
+  await page.goto('/guides/paint-vaulted-ceiling-area/');
+  await expect(page.locator('article table')).toHaveCount(3);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  for (const worksheet of await page.locator('article .table-scroll').all()) {
+    expect(await worksheet.evaluate((element) => element.getBoundingClientRect().right <= window.innerWidth)).toBe(true);
+  }
+  await expect(page.locator('article a[href="/calculators/paint-coverage/"]')).toHaveText('paint coverage calculator');
+});

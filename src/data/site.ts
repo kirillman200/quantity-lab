@@ -129,6 +129,7 @@ export const calculators: CalculatorDefinition[] = [
 ];
 
 export interface GuideDefinition {
+  seo?: { exactTitle: boolean; socialTitle: string; socialDescription: string; lang: string };
   image?: { src: string; alt: string; width: number; height: number };
   imageCaption?: string;
   slug: string;
@@ -139,12 +140,25 @@ export interface GuideDefinition {
   datePublished?: string;
   dateModified?: string;
   intro: string;
-  sections: Array<{ heading: string; paragraphs: string[]; steps?: string[]; links?: Array<{ label: string; url: string }> }>;
+  sections: Array<{ heading: string; paragraphs: string[]; linkedParagraph?: { before: string; label: string; url: string; after: string }; steps?: string[]; links?: Array<{ label: string; url: string }> }>;
   takeaway: string;
   sources?: Array<{ label: string; url: string }>;
 }
 
 export const guides: GuideDefinition[] = [
+  {
+  "slug": "paint-vaulted-ceiling-area",
+  seo: { exactTitle: true, socialTitle: "How Much Paint for a Vaulted Ceiling? Measure the Area", socialDescription: "Measure both sloping ceiling planes, calculate finish paint in gallons or litres, and check the rounded cans against the coverage calculator.", lang: "en-CA" },
+  "title": "How Much Paint for a Vaulted Ceiling? Measure the Area",
+  "description": "Calculate vaulted ceiling paint from each sloped plane, not the floor. Follow metric and imperial examples, allow for coats and round up to whole cans.",
+  "category": "paint",
+  "readingTime": "7 min",
+  "datePublished": "2026-11-18",
+  "dateModified": "2026-11-18",
+  "intro": "To calculate paint for a vaulted ceiling, add the sloped surface areas, multiply by coats and your chosen allowance, then divide by label coverage. A 400 sq ft ceiling needs 2.2 US gallons at 400 sq ft per US gallon, two coats and 10% extra, before rounding to whole cans.",
+  "sections": [],
+  "takeaway": ""
+},
   {
   "slug": "grout-quantity-product-coverage",
   "title": "How much grout do I need? Read the product coverage chart first",
@@ -693,7 +707,7 @@ export const guides: GuideDefinition[] = [
     sections: [
       { heading: 'Measure the room shell', paragraphs: ['Measure the length and width at floor level, then measure wall height from finished floor to ceiling. Older rooms can vary, so use the tallest height when you want a conservative estimate.'], steps: ['Sketch the room and label length and width.', 'Measure the wall height.', 'Record any half walls, alcoves, or sections with a different height separately.'] },
       { heading: 'Record openings', paragraphs: ['Measure each door and window as width × height. Subtract only openings that will not be painted. A closet door, built-in cabinet, or large fireplace can be treated the same way.'], steps: ['Count repeated opening sizes.', 'Keep trim separate if it uses another product.', 'Do not subtract tiny outlets or switch plates; their area is negligible.'] },
-      { heading: 'Audit the result', paragraphs: ['The four-wall area for a rectangular room is 2 × (length + width) × height. Add length × width for a painted ceiling, then subtract openings. Compare that result with your notes before selecting coats and coverage.'] },
+      { heading: 'Audit the result', paragraphs: [], linkedParagraph: { before: 'The four-wall area for a rectangular room is 2 × (length + width) × height. Add length × width for a flat painted ceiling; for a vaulted ceiling, ', label: 'measure and add the sloped ceiling planes', url: '/guides/paint-vaulted-ceiling-area/', after: ' instead, then subtract openings. Compare that result with your notes before selecting coats and coverage.' } },
     ], takeaway: 'Keep one line per room. A room-by-room plan is easier to revise, save, share, and shop from than one unexplained total.'
   },
   {

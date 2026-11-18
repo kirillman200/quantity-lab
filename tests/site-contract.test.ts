@@ -49,6 +49,24 @@ describe('built public contract', () => {
     }
   });
 
+  it('renders the vaulted ceiling worksheets, citations and contextual backlink', () => {
+    const html = readFileSync(routeFile('/guides/paint-vaulted-ceiling-area/'), 'utf8');
+    expect((html.match(/<table(?:\s[^>]*)?>/g) ?? []).length).toBe(3);
+    expect(html).toContain('scope="col"');
+    expect(html).toContain('scope="row"');
+    for (const url of [
+      'https://openstax.org/books/prealgebra-2e/pages/c-geometric-formulas',
+      'https://www.benjaminmoore.com/en-us/c/ceiling-paint',
+      'https://www.sherwin-williams.com/en-us/color/color-tools/paint-calculator',
+      '/calculators/paint-coverage/',
+    ]) expect(html).toContain(`href="${url}"`);
+    expect(html).toContain('<title>How Much Paint for a Vaulted Ceiling? Measure the Area</title>');
+    expect(html).toContain('lang="en-CA"');
+    expect(html).toContain('Sources checked November 2026.');
+    const older = readFileSync(routeFile('/guides/measure-room-for-paint/'), 'utf8');
+    expect(older).toMatch(/for a flat painted ceiling; for a vaulted ceiling, <a href="\/guides\/paint-vaulted-ceiling-area\/">measure and add the sloped ceiling planes<\/a> instead, then subtract openings\./);
+  });
+
   it('renders the mulch article release dates consistently', () => {
     const html = readFileSync(routeFile('/guides/mulch-top-up-missing-layer-estimate/'), 'utf8');
     const schemas = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
