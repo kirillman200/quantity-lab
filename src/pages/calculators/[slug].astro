@@ -20,14 +20,11 @@ const jsonLd = [
 
   <section class="section calculator-workspace"><div class="shell"><ProjectPlanner kind={calculator.slug} accent={calculator.accent} client:only="vue" /><noscript><div class="disclaimer">The interactive calculator needs JavaScript. The formulas, assumptions, examples, and guides below remain available.</div></noscript></div></section>
 
-  <div class="shell"><div class="ad-slot print-hidden" aria-label="Reserved ad space"><span>Reserved ad space</span></div></div>
-
   <section class="section"><div class="shell content-grid"><article class="prose">
     <p class="eyebrow">Understand the estimate</p><h2>Formula and assumptions</h2><p>{calculator.formula}</p><div class="formula-card"><p class="formula">{calculator.formula}</p></div>
     <h3>Assumptions to confirm</h3><ul>{calculator.assumptions.map((item) => <li>{item}</li>)}</ul>
     <div class="measurement-diagram" aria-label={`Conceptual measurement diagram for ${calculator.shortName}`} style={`--accent:${calculator.accent}`}><div class="diagram-shape"><span class="dimension dim-a">length</span><span class="dimension dim-b">width</span><span class="diagram-cutout"></span></div><div><strong>Break the project into simple shapes.</strong><p>Label every measurement and keep exclusions visible. Add the shapes in the calculator instead of hiding them inside one total.</p></div></div>
     <h2>Worked example</h2><div class="example-card"><h3>Input</h3><p>{calculator.example.input}</p><h3>Planning result</h3><p>{calculator.example.result}</p></div>
-    <div class="ad-slot compact print-hidden" aria-label="Reserved ad space"><span>Reserved ad space</span></div>
     <h2>Common package sizes</h2><p>Package conventions vary by brand and region. Enter the usable coverage or yield shown on the actual product instead of relying on the name or weight alone.</p><ul>{calculator.packages.map((item) => <li>{item}</li>)}</ul>
     <h2>Frequently asked questions</h2><div class="faq-list">{calculator.faq.map((item) => <details><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div>
     <div class="disclaimer"><strong>Planning estimate:</strong> Confirm package coverage, installation instructions, site conditions, safety requirements, and local codes before purchasing or starting work.</div>

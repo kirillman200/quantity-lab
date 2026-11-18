@@ -10,6 +10,5 @@ const jsonLd = { '@type': 'CollectionPage', name: 'Home Project Measurement Guid
       const categoryGuides = guides.filter((guide) => guide.category === calculator.slug);
       return <section style="margin-bottom:4rem"><div class="section-head"><div><p class="eyebrow">{calculator.eyebrow}</p><h2>{calculator.shortName}</h2></div><a href={`/calculators/${calculator.slug}/`}>Open calculator →</a></div><div class="guide-grid">{categoryGuides.map((guide) => <a class="guide-card" href={`/guides/${guide.slug}/`}><span class="meta"><span>Guide</span><span>{guide.readingTime}</span></span><h3>{guide.title}</h3><p>{guide.description}</p></a>)}</div></section>;
     })}
-    <div class="ad-slot print-hidden" aria-label="Reserved ad space"><span>Reserved ad space</span></div>
   </div></section>
 </BaseLayout>
