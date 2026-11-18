@@ -129,7 +129,7 @@ export const calculators: CalculatorDefinition[] = [
 ];
 
 export interface GuideDefinition {
-  seo?: { exactTitle: boolean; socialTitle: string; socialDescription: string; lang: string };
+  seo?: { exactTitle?: boolean; socialTitle?: string; socialDescription?: string; lang?: string; description?: string };
   image?: { src: string; alt: string; width: number; height: number };
   imageCaption?: string;
   slug: string;
@@ -148,7 +148,7 @@ export interface GuideDefinition {
 export const guides: GuideDefinition[] = [
   {
   "slug": "paint-vaulted-ceiling-area",
-  seo: { exactTitle: true, socialTitle: "How Much Paint for a Vaulted Ceiling? Measure the Area", socialDescription: "Measure both sloping ceiling planes, calculate finish paint in gallons or litres, and check the rounded cans against the coverage calculator.", lang: "en-CA" },
+  seo: { description: "Calculate vaulted ceiling paint from each sloped plane, not the floor. Follow metric and imperial examples, allow for coats and round up to whole cans.", exactTitle: true, socialTitle: "How Much Paint for a Vaulted Ceiling? Measure the Area", socialDescription: "Measure both sloping ceiling planes, calculate finish paint in gallons or litres, and check the rounded cans against the coverage calculator.", lang: "en-CA" },
   "title": "How Much Paint for a Vaulted Ceiling? Measure the Area",
   "description": "Calculate vaulted ceiling paint from each sloped plane, not the floor. Follow metric and imperial examples, allow for coats and round up to whole cans.",
   "category": "paint",

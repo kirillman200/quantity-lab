@@ -3,7 +3,7 @@ import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
-import { publicRoutes, SITE } from '../src/data/site';
+import { guides, publicRoutes, SITE } from '../src/data/site';
 
 const dist = join(process.cwd(), 'dist');
 const indexNowKey = 'e09e056626954935beae46d6a88ea697';
@@ -46,6 +46,18 @@ describe('built public contract', () => {
       expect(titles.has(title), `duplicate title: ${title}`).toBe(false);
       expect(descriptions.has(description), `duplicate description: ${description}`).toBe(false);
       titles.add(title); descriptions.add(description);
+    }
+  });
+
+  it('renders guide metadata and omits unserved ad placeholders', () => {
+    for (const guide of guides) {
+      const html = readFileSync(routeFile(`/guides/${guide.slug}/`), 'utf8');
+      expect(html).not.toContain('Reserved ad space');
+      expect(extract(html, /<title>([^<]+)<\/title>/i)).toBe(guide.title);
+      const expected = guide.seo?.description ?? guide.description;
+      // HTML attributes escape ampersands and quotes.
+      const escaped = expected.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;');
+      expect(extract(html, /<meta name="description" content="([^"]+)"/i)).toBe(escaped);
     }
   });
 
@@ -207,16 +219,10 @@ describe('built public contract', () => {
     expect(ico.readUInt16LE(4)).toBe(3);
   });
 
-  it('uses only the standard reserved ad-space label', () => {
-    const routes = ['/', '/calculators/', '/calculators/paint/', '/calculators/paint-coverage/', '/guides/', '/guides/paint-coverage/', '/guides/spray-paint-coverage/'];
-    for (const route of routes) {
-      const html = readFileSync(routeFile(route), 'utf8');
-      const slots = [...html.matchAll(/<div class="[^"]*ad-slot[^"]*"[^>]*>([\s\S]*?)<\/div>/g)];
-      expect(slots.length, `${route} should include reserved ad space`).toBeGreaterThan(0);
-      for (const slot of slots) {
-        expect(slot[1].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()).toBe('Reserved ad space');
-        expect((slot[1].match(/<span(?:\s[^>]*)?>/g) ?? []).length).toBe(1);
-      }
+  it('does not render unserved ad placeholders on public routes', () => {
+    for (const route of publicRoutes) {
+      const html = readFileSync(routeFile(route.path), 'utf8');
+      expect(html, route.path).not.toContain('Reserved ad space');
     }
   });
 
