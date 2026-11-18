@@ -153,8 +153,8 @@ export const guides: GuideDefinition[] = [
   "description": "Calculate vaulted ceiling paint from each sloped plane, not the floor. Follow metric and imperial examples, allow for coats and round up to whole cans.",
   "category": "paint",
   "readingTime": "7 min",
-  "datePublished": "2026-11-17",
-  "dateModified": "2026-11-17",
+  "datePublished": "2026-11-18",
+  "dateModified": "2026-11-18",
   "intro": "To calculate paint for a vaulted ceiling, add the sloped surface areas, multiply by coats and your chosen allowance, then divide by label coverage. A 400 sq ft ceiling needs 2.2 US gallons at 400 sq ft per US gallon, two coats and 10% extra, before rounding to whole cans.",
   "sections": [],
   "takeaway": ""
